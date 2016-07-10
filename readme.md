@@ -4,6 +4,12 @@ realtime terminal RPG game written in C
 # Play demo
 ![alt tag](https://github.com/x86poem/C-RPG/blob/master/Animation.gif)
 
+# How to play
+1. download exe file and data folder.
+
+2. place them in a same folder.
+
+3. run exe file
 
 # Available key
 [Arrow-up] Move up
