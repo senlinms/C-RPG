@@ -289,11 +289,18 @@ int set_obj_with_line(Object* o, char* line)
         o->shape.str[len] = 0;
         return 1;
     }
-	if(same_until_char(first,"timer  ",' '))
+	if(same_until_char(first,"timer ",' '))
     {
         
         strncpy(buf,second,len);
         o->timer = atoi(buf);
+        return 1;
+    }
+	if(same_until_char(first,"shape.layer ",' '))
+    {
+        
+        strncpy(buf,second,len);
+        o->shape.layer = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"shape.fg_color ",' '))
@@ -405,9 +412,7 @@ int set_obj_with_line(Object* o, char* line)
     }
 	
 	if(same_until_char(first,"fn_overlap ",' '))
-    {
-        
-        
+    {        
         strncpy(buf,second,len);
 		fnptr fn = table_obj_fn_by_long_name(table_overlap_obj_fn,buf);
 		o->overlap_fn = fn;
@@ -418,7 +423,10 @@ int set_obj_with_line(Object* o, char* line)
 	#ifdef DEBUG
 	MessageBoxA(0,line,"set_obj_with_line",MB_OK);
 	#endif
-    return 0;
+	
+	//ignore unknown things
+	//if you want to inspect unknown string use return 0;
+    return 1;
 }
 
 int mod_obj_with_buf(char * buf,Object* o)

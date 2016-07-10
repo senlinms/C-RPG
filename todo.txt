@@ -1,5 +1,5 @@
-change direction if Object change direction.
-(hero)
+
+data file - add layer feature
 
 add ui: blink direction indicator
 
@@ -11,7 +11,4 @@ follow object system
 a* algorithm
 
 get_cell_layer optimize
-
-
-
-data폴더 안에 데이터 넣고 그걸로 객체 만들기
+heal - spread heals 5x5 size
