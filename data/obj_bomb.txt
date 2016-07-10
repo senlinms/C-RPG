@@ -1,0 +1,7 @@
+shape.str !
+type bomb
+shape.fg_color 14
+shape.bg_color 0
+shape.block 1
+fn_tick obj_fn_bomb_timer
+timer 30

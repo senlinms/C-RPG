@@ -1,0 +1,17 @@
+change direction if Object change direction.
+(hero)
+
+add ui: blink direction indicator
+
+apply new tick system(need faster tick)
+
+imitate starcraft use map setting game
+
+follow object system
+a* algorithm
+
+get_cell_layer optimize
+
+
+
+data폴더 안에 데이터 넣고 그걸로 객체 만들기
