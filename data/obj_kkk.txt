@@ -12,3 +12,4 @@ power 3
 offset_x 1
 offset_y 1
 fn_tick obj_fn_move_random
+fn_overlap overlap_fn_root_me

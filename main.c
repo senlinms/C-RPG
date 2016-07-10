@@ -147,6 +147,9 @@ void scene_map(World* w)
 }
 int main()
 {
+	#ifdef DEBUG
+	MessageBoxA(0,"this is debug session","title",MB_OK);
+	#endif
 	scene = scene_map;
 	 World *w = game_init();
 	while(scene != 0)

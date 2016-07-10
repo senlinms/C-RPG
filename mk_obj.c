@@ -8,7 +8,14 @@ fn_name_pair table_tick_obj_fn[100] = {
 		{"thru_bullet_timer","obj_fn_thru_bullet_timer",fn_thru_bullet_timer},
 		{"heal_timer","obj_fn_heal_timer",fn_heal_timer}};
 		
-
+fn_name_pair table_overlap_obj_fn[100] = {
+		{"heal","overlap_fn_heal",fn_heal},
+		{"damage","overlap_fn_damage", fn_damage},
+		{"kill","overlap_fn_kill",fn_kill},
+		{"root_me","overlap_fn_root_me",fn_root_me},
+		{"explode_bullet","overlap_fn_explode_bullet",fn_explode_bullet}};
+		
+		
 Object* new_mk_obj(char* , World * , int , int , Object* );		
 fnptr table_obj_fn_by_long_name(fn_name_pair * table, char* long_name)
 {
@@ -52,8 +59,13 @@ Object mk_dummy(World *w, int x, int y,Object* parent)
     o.power = 1;
     o.shape.block = 1;
     strcpy(o.operation_mode,"debug");
-
     o.world = w;
+	
+	
+	#ifdef DEBUG
+	o.shape.layer = 0;
+	#endif
+	
     return o;
 }
 Object mk_bomb(World *w, int x, int y,Object* parent)
@@ -252,70 +264,69 @@ int same_until_char(char* s1, char*s2,char c)
 
     }
 }
-
-//obj_x.txt안에는 언제나 끝에 한줄을 비워둘것!
+//obj_x.txt need newline at the end!
 int set_obj_with_line(Object* o, char* line)
 {
+	#ifdef DEBUG
+	MessageBoxA(0,line,"set_obj_with_line",MB_OK);
+	#endif
     char* first = line;
     char*second = line + char_pos_ith(line,' ',0) + 1;
+    int len = str_len_char(second,'\r');
+	char buf[32];
+	memset(buf,0,sizeof(char)*32);
     if(same_until_char(first,"type ",' '))
     {
-        int len = str_len_char(second,'\r');
+        
         strncpy(o->type,second,len);
         o->type[len] = 0;
         return 1;
     }
     if(same_until_char(first,"shape.str ",' '))
     {
-        int len = str_len_char(second,'\r');
+        
         strncpy(o->shape.str,second,len);
         o->shape.str[len] = 0;
         return 1;
     }
 	if(same_until_char(first,"timer  ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->timer = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"shape.fg_color ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->shape.fg_color = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"shape.bg_color ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->shape.bg_color = atoi(buf);
         return 1;
     }
 	if(same_until_char(first,"shape.block ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->shape.block = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"hp ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->hp = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"max_hp ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->max_hp = atoi(buf);
         return 1;
@@ -323,24 +334,21 @@ int set_obj_with_line(Object* o, char* line)
 
     if(same_until_char(first,"mp ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->mp = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"max_mp ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->max_mp = atoi(buf);
         return 1;
     }
     if(same_until_char(first,"power ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         o->power = atoi(buf);
         return 1;
@@ -348,48 +356,45 @@ int set_obj_with_line(Object* o, char* line)
 
     if(same_until_char(first,"item ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         add_slot(o,"item",buf);
         return 1;
     }
     if(same_until_char(first,"skill ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
         add_slot(o,"skill",buf);
         return 1;
     }
     if(same_until_char(first,"debug ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
+        
         strncpy(buf,second,len);
         add_slot(o,"debug",buf);
         return 1;
     }
 	if(same_until_char(first,"offset_x ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
+        
         strncpy(buf,second,len);
 		obj_move(o->world,o,atoi(buf),0);
         return 1;
     }
 	if(same_until_char(first,"offset_y ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
         strncpy(buf,second,len);
 		obj_move(o->world,o,0,atoi(buf));
         return 1;
     }
 	if(same_until_char(first,"fn_tick ",' '))
     {
-        int len = str_len_char(second,'\r');
-        char buf[32]= {0,};
+        
+        
         strncpy(buf,second,len);
 		fnptr fn = table_obj_fn_by_long_name(table_tick_obj_fn,buf);
 		o->tick_fn = fn;
@@ -398,6 +403,21 @@ int set_obj_with_line(Object* o, char* line)
 		
         return 1;
     }
+	
+	if(same_until_char(first,"fn_overlap ",' '))
+    {
+        
+        
+        strncpy(buf,second,len);
+		fnptr fn = table_obj_fn_by_long_name(table_overlap_obj_fn,buf);
+		o->overlap_fn = fn;
+		if(fn == 0)
+			return 0;
+        return 1;
+    }
+	#ifdef DEBUG
+	MessageBoxA(0,line,"set_obj_with_line",MB_OK);
+	#endif
     return 0;
 }
 
@@ -417,7 +437,7 @@ int mod_obj_with_buf(char * buf,Object* o)
             char error_str[256];
             MessageBox(0,buf,"error",MB_OK);
 			
-			sprintf(error_str,"line index:%d\nstring:%s",i,line);
+			sprintf(error_str,"line index:%d\nstring:%s\nstrlen:%d",i,line,strlen(line));
             MessageBox(0,error_str,"error",MB_OK);
 			
             break;
@@ -530,6 +550,7 @@ int new_obj(World * w, char * type, int x, int y, Object* parent)
 
 Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
 {
+	
 	char file_name[256];
 	sprintf(file_name,"./data/obj_%s.txt",name);
 	FILE * fp = fopen(file_name,"rb");
@@ -549,6 +570,10 @@ Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
     Object o = mk_dummy(w,x,y,parent);
     mod_obj_with_buf(buf,&o);
     int k = get_empty_obj_index(w);
+	
+	#ifdef DEBUG
+	o.shape.layer = 0;
+	#endif
     if(k==-1)
         return -1;
     w->objs[k] = o;
@@ -556,6 +581,6 @@ Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
     {
         w->hero = &(w->objs[k]);
     }
-	//o를 리턴하면 안됨. o는 스택에 들어어서 함수가 끝나면 삭제됨
+	//never return o. o is in stack. therefore it will be deleted when function finished.
     return &(w->objs[k]);
 }
