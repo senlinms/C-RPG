@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#define FPS_LIMIT 500
 #define BUFFER_CX 80
 #define BUFFER_CY 24
 
@@ -82,7 +82,6 @@ typedef struct World
 #include "obj.h"
 #include "obj_handler.h"
 #include "tick.h"
-
 
 #endif // GAME_H_INCLUDED
 

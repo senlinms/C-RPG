@@ -76,24 +76,24 @@ void fps()
 {
     static clock_t fps_t = 0;
     static clock_t loop_t2;
-    static clock_t loop_t1;
+    static clock_t loop_t1 =0; 
     static int loop_frame = 0;
     static int max_fps=0;
 
-    loop_t1 = clock();
 
+	loop_frame++;
     if (fps_t + 1000  <= clock())
     {
         gotoxy(0,24);
         set_color(0,15);
 
         printf("fps:[%3d] goal_fps:[%3d]",loop_frame,goal_fps);
-        if (max_fps == 0)
+        if (loop_frame < goal_fps)
         {
             set_color(0,4+8);
             printf("          ");
         }
-        if (max_fps == 1)
+        if (loop_frame >= goal_fps)
         {
             set_color(0,4+8);
             printf(" [max_fps]");
@@ -102,21 +102,19 @@ void fps()
         fps_t = clock();
         loop_frame = 0;
     }
-
-    loop_t2 = clock();
-    loop_frame++;
-    clock_t diff = loop_t2 - loop_t1;
-    clock_t tick_ms = 1000/goal_fps;
-    if (diff <= tick_ms)
-    {
-        Sleep(tick_ms - diff);
-        max_fps = 0;
-    }
-    else
-    {
-        max_fps = 1;
-    }
-
+	
+    while(1)
+	{
+		if (clock() - loop_t1 < (1000/goal_fps) )
+		{
+			Sleep(1);
+		}
+		else
+		{		
+			loop_t1 = clock();
+			break;
+		}
+	}
 }
 void game_update(World* w)
 {

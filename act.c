@@ -104,8 +104,8 @@ void debug_save_world(Object * obj)
 void debug_fps_plus(Object * obj)
 {
     goal_fps += 5;
-    if (goal_fps >= 100)
-        goal_fps = 100;
+    if (goal_fps >= FPS_LIMIT)
+        goal_fps = FPS_LIMIT;
 }
 void debug_fps_minus(Object * obj)
 {

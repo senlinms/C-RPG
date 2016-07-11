@@ -62,10 +62,6 @@ Object mk_dummy(World *w, int x, int y,Object* parent)
     o.world = w;
 
 
-#ifdef DEBUG
-    o.shape.layer = 0;
-#endif
-
     return o;
 }
 Object mk_bomb(World *w, int x, int y,Object* parent)
@@ -267,9 +263,7 @@ int same_until_char(char* s1, char*s2,char c)
 //obj_x.txt need newline at the end!
 int set_obj_with_line(Object* o, char* line)
 {
-#ifdef DEBUG
-    MessageBoxA(0,line,"set_obj_with_line",MB_OK);
-#endif
+
     char* first = line;
     char*second = line + char_pos_ith(line,' ',0) + 1;
     int len = str_len_char(second,'\r');
@@ -420,9 +414,6 @@ int set_obj_with_line(Object* o, char* line)
             return 0;
         return 1;
     }
-#ifdef DEBUG
-    MessageBoxA(0,line,"set_obj_with_line",MB_OK);
-#endif
 
     //ignore unknown things
     //if you want to inspect unknown string use return 0;
@@ -579,9 +570,7 @@ Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
     mod_obj_with_buf(buf,&o);
     int k = get_empty_obj_index(w);
 
-#ifdef DEBUG
-    o.shape.layer = 0;
-#endif
+
     if (k==-1)
         return -1;
     w->objs[k] = o;
