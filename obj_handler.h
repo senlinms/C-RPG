@@ -1,6 +1,5 @@
 #ifndef PROTO_OBJ_HANDLER_H
 #define PROTO_OBJ_HANDLER_H
-#include "game.h"
 extern int fn_fire_timer(Object* o);
 extern int fn_explode_bullet(Object *me, Object*other);
 extern int fn_root_me(Object* me, Object* other);

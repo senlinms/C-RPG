@@ -1,6 +1,5 @@
 #ifndef PROTO_DRAW_H
 #define PROTO_DRAW_H
-#include "game.h"
 extern void print_mode_slots(int x, int y, Object* obj, int max_str_len, char (*slots)[SHORT_STRLEN];);
 extern void print_mode(int x, int y, Object *obj);
 extern void print_mode_name(int x,int y,Object * obj, char* mode);

@@ -11,15 +11,13 @@ void set_color(char bg, char fg)
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(h,c);
 }
-
-
 void print_notice(Object* obj,int x, int y)
 {
     set_str(screen_buffer,obj->last_notice,x,y,0,3+8);
 }
 void set_cell(CHAR_INFO * buffer,char c, int x, int y, unsigned char bg, unsigned char fg)
 {
-    if(y<0|| x<0 || y>=BUFFER_CY||x>=BUFFER_CX)
+    if (y<0|| x<0 || y>=BUFFER_CY||x>=BUFFER_CX)
         return;
     CHAR_INFO ci;
     ci.Char.AsciiChar = c;
@@ -29,10 +27,10 @@ void set_cell(CHAR_INFO * buffer,char c, int x, int y, unsigned char bg, unsigne
 void set_str(CHAR_INFO *buffer,char * str, int x , int y, unsigned char bg, unsigned char fg)
 {
     int cx;
-    for(cx=0; cx<BUFFER_CX; cx++)
+    for (cx=0; cx<BUFFER_CX; cx++)
     {
         char c = str[cx];
-        if(c == 0)
+        if (c == 0)
             break;
         set_cell(buffer,c,x+cx,y,bg,fg);
     }
@@ -51,9 +49,9 @@ void draw(World * w)
     static Cell * cell_buffer[20][30];
     memset(cell_buffer,0,sizeof(Cell*)*20*30);
     //map screen size == 30x20
-    for(cy = 0; cy<20; cy++)
+    for (cy = 0; cy<20; cy++)
     {
-        for(cx = 0; cx<30; cx++)
+        for (cx = 0; cx<30; cx++)
         {
             int hx = w->hero->x;
             int hy = w->hero->y;
@@ -61,10 +59,10 @@ void draw(World * w)
             //get_cell returns tile or obj shape
             Cell * c;
             c = get_cell_layer(w,hx-15+cx,hy-10+cy,2);
-            if(c == 0)
+            if (c == 0)
             {
                 c= get_cell_layer(w,hx-15+cx,hy-10+cy,1);
-                if(c == 0)
+                if (c == 0)
                 {
                     c= get_cell_layer(w,hx-15+cx,hy-10+cy,0);
                 }
@@ -73,12 +71,12 @@ void draw(World * w)
         }
     }
     memset(screen_buffer,0,sizeof(CHAR_INFO)*BUFFER_CX*BUFFER_CY);
-    for(cy = 0; cy<20; cy++)
+    for (cy = 0; cy<20; cy++)
     {
-        for(cx = 0; cx<30; cx++)
+        for (cx = 0; cx<30; cx++)
         {
             Cell *c = cell_buffer[cy][cx];
-            if(c == 0)
+            if (c == 0)
             {
                 set_cell(screen_buffer,' ',cx*2,cy,0,0);
                 set_cell(screen_buffer,' ',cx*2+1,cy,0,0);
@@ -88,18 +86,18 @@ void draw(World * w)
                 //trim to fit 2 char
                 c->str[2] = 0;
                 int len = strlen(c->str);
-                if(len == 0)
+                if (len == 0)
                 {
                     set_cell(screen_buffer,' ',cx*2,cy,0,0);
                     set_cell(screen_buffer,' ',cx*2+1,cy,0,0);
                 }
-                if(len==1)
+                if (len==1)
                 {
 
                     set_cell(screen_buffer,c->str[0],cx*2,cy, c->bg_color, c->fg_color);
                     set_cell(screen_buffer,' ',cx*2+1,cy,0,0);
                 }
-                if(len == 2)
+                if (len == 2)
                 {
                     set_cell(screen_buffer,c->str[0],cx*2,cy, c->bg_color, c->fg_color);
                     set_cell(screen_buffer,c->str[1],cx*2+1,cy,c->bg_color,c->fg_color);
@@ -125,7 +123,7 @@ void draw(World * w)
 int draw_info(int display_x, int display_y, World* w, int x, int y,Object* exclude)
 {
     Object* obj = obj_at(w,x,y,exclude);
-    if(obj==0)
+    if (obj==0)
         return 0;
     set_str(screen_buffer,obj->type,display_x,display_y,0,obj->shape.fg_color);
     return 1;
@@ -133,7 +131,7 @@ int draw_info(int display_x, int display_y, World* w, int x, int y,Object* exclu
 void print_gauge(int x,int y, int max,int current, unsigned char bright_color,unsigned char dark_color)
 {
     int dark, bright;
-    if(max == 0)
+    if (max == 0)
     {
         //10 character
         set_str(screen_buffer,"None      ",x,y,0,dark_color);
@@ -141,11 +139,11 @@ void print_gauge(int x,int y, int max,int current, unsigned char bright_color,un
     }
     double g = (double)current/(double)max;
     int percent = g*100;
-    if(percent > 100)
+    if (percent > 100)
     {
         percent = 100;
     }
-    else if(percent <= 0)
+    else if (percent <= 0)
     {
         percent = 0;
     }
@@ -154,9 +152,9 @@ void print_gauge(int x,int y, int max,int current, unsigned char bright_color,un
     dark = 10 - bright;
 
     int bi,di;
-    for(bi=0; bi<bright; bi++)
+    for (bi=0; bi<bright; bi++)
         set_str(screen_buffer," ",x+bi,y,bright_color,0);
-    for(di=0; di<dark; di++)
+    for (di=0; di<dark; di++)
         set_str(screen_buffer," ",x+bi+di,y,dark_color,0);
 
 }
@@ -168,7 +166,7 @@ void print_mode_name(int x,int y,Object * obj, char* mode)
     sprintf(buf,"[%s]",mode);
     int len = strlen(buf);
     int pad = 16 - len;
-    if(pad < 0)
+    if (pad < 0)
         buf[15]=0;
     set_str(screen_buffer,buf,x,y,0,15);
 }
@@ -177,11 +175,11 @@ void print_mode(int x, int y, Object *obj)
     char* mode = obj->operation_mode;
     print_mode_name(x,y,obj,mode);
 
-    if(!strcmp(mode,"skill"))
+    if (!strcmp(mode,"skill"))
         print_mode_slots(x,y+1,obj,14,obj->skill_slots);
-    if(!strcmp(mode,"item"))
+    if (!strcmp(mode,"item"))
         print_mode_slots(x,y+1,obj,14,obj->item_slots);
-    if(!strcmp(mode,"debug"))
+    if (!strcmp(mode,"debug"))
         print_mode_slots(x,y+1,obj,14,obj->debug_slots);
 }
 
@@ -190,21 +188,19 @@ void print_mode_slots(int x, int y, Object* obj, int max_str_len, char (*slots)[
 {
     int i;
     int ii = 0;
-    for(i=0; i<10; i++)
+    for (i=0; i<10; i++)
     {
-        if(!strcmp(slots[i],""))
+        if (!strcmp(slots[i],""))
             continue;
         char buf[64];
 
         sprintf(buf,"[%d] %s",i,slots[i]);
-        if(strlen(buf)>max_str_len)
+        if (strlen(buf)>max_str_len)
             buf[max_str_len] = 0;
         int pad = max_str_len - strlen(buf);
         int k;
         set_str(screen_buffer,buf,x,y+ii,0,15-8);
         ii++;
     }
-
-
-
 }
+

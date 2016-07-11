@@ -1,6 +1,5 @@
 #ifndef PROTO_MK_OBJ_H
 #define PROTO_MK_OBJ_H
-#include "game.h"
 extern Object mk_dummy(World *w, int x, int y,Object* parent);
 extern Object mk_bomb(World *w, int x, int y,Object* parent);
 extern Object mk_fire(World *w, int x, int y,Object* parent);

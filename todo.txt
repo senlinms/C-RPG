@@ -1,6 +1,4 @@
 
-data file - add layer feature
-
 add ui: blink direction indicator
 
 apply new tick system(need faster tick)

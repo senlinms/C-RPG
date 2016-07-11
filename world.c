@@ -2,18 +2,18 @@
 int find_empty_slot(Object *obj,char *mode)
 {
     char (*slots)[SHORT_STRLEN];
-    if(!strcmp(mode,"debug"))
+    if (!strcmp(mode,"debug"))
         slots = obj->debug_slots;
-    else if(!strcmp(mode,"skill"))
+    else if (!strcmp(mode,"skill"))
         slots = obj->skill_slots;
-    else if(!strcmp(mode,"item"))
+    else if (!strcmp(mode,"item"))
         slots = obj->item_slots;
     else
         return -1;
     int i;
-    for(i=0; i<10; i++)
+    for (i=0; i<10; i++)
     {
-        if(!strcmp(slots[i],""))
+        if (!strcmp(slots[i],""))
             return i;
     }
     return -1;
@@ -22,9 +22,9 @@ int num_of_empty_slot(Object* obj, char (*slots)[SHORT_STRLEN])
 {
     int empty = 0;
     int i;
-    for(i=0; i<10; i++)
+    for (i=0; i<10; i++)
     {
-        if(!strcmp(slots[i],""))
+        if (!strcmp(slots[i],""))
             empty++;
     }
     return empty;
@@ -33,15 +33,15 @@ int num_of_empty_slot(Object* obj, char (*slots)[SHORT_STRLEN])
 Object* obj_at(World* w, int x, int y, Object *exclude)
 {
     int i;
-    for(i=0; i<500; i++)
+    for (i=0; i<500; i++)
     {
-        if(w->objs[i].exist == 0)
+        if (w->objs[i].exist == 0)
             continue;
-        if(w->objs[i].x != x)
+        if (w->objs[i].x != x)
             continue;
-        if(w->objs[i].y != y)
+        if (w->objs[i].y != y)
             continue;
-        if(&(w->objs[i]) == exclude)
+        if (&(w->objs[i]) == exclude)
             continue;
         return &(w->objs[i]);
     }
@@ -58,35 +58,35 @@ Cell* get_cell_layer(World*w, int x, int y, int layer)
 
     int i;
 
-    if(x<0 || y<0 || x >=100 || y >= 100)
+    if (x<0 || y<0 || x >=100 || y >= 100)
         return 0;
 
-    for(i = 0; i<500; i++)
+    for (i = 0; i<500; i++)
     {
         Object *o = &(w->objs[i]);
-        if(o->exist == 0)
+        if (o->exist == 0)
             continue;
-        if(o->x == x &&o->y == y &&o->shape.layer == layer)
+        if (o->x == x &&o->y == y &&o->shape.layer == layer)
             return &(o->shape);
     }
     Cell * mc = &(w->map[y][x]);
-    if(layer == mc->layer)
+    if (layer == mc->layer)
         return &(w->map[y][x]);
     return 0;;
 }
 int add_slot(Object *obj, char* mode, char* new_slot)
 {
     char (*slots)[SHORT_STRLEN];
-    if(!strcmp(mode,"debug"))
+    if (!strcmp(mode,"debug"))
         slots = obj->debug_slots;
-    else if(!strcmp(mode,"skill"))
+    else if (!strcmp(mode,"skill"))
         slots = obj->skill_slots;
-    else if(!strcmp(mode,"item"))
+    else if (!strcmp(mode,"item"))
         slots = obj->item_slots;
     else
         return 0;
     int empty_i = find_empty_slot(obj,mode);
-    if(empty_i== -1)
+    if (empty_i== -1)
         return 0;
     strcpy(slots[empty_i], new_slot);
     return 1;
@@ -105,11 +105,11 @@ int load_world(World * w, char *file_name)
     fread(w,sizeof(World),1,fp);
     fclose(fp);
     int i;
-    for(i = 0; i<500; i++)
+    for (i = 0; i<500; i++)
     {
-        if(w->objs[i].exist == 1)
+        if (w->objs[i].exist == 1)
             w->objs[i].world = w;
-        if(w->objs[i].shape.str[0] == '@')
+        if (w->objs[i].shape.str[0] == '@')
             w->hero = &(w->objs[i]);
     }
     return 1;
@@ -117,7 +117,7 @@ int load_world(World * w, char *file_name)
 
 int put_cell(World * w, int x, int y, Cell c)
 {
-    if(y<0 || x<0 || y>= 100 || x>=100)
+    if (y<0 || x<0 || y>= 100 || x>=100)
         return 0;
     w->map[y][x] = c;
     return 1;
@@ -149,9 +149,9 @@ int delete_cell(World * w, int x, int y)
 int get_empty_obj_index(World *w)
 {
     int i;
-    for(i = 0; i<500; i++)
+    for (i = 0; i<500; i++)
     {
-        if(w->objs[i].exist == 0)
+        if (w->objs[i].exist == 0)
             return i;
     }
     return -1;
@@ -161,21 +161,21 @@ int get_empty_obj_index(World *w)
 int check_block(World * w, int x, int y,int layer)
 {
     int i;
-    if(x >= 100|| y >= 100 || x <0||y<0)
+    if (x >= 100|| y >= 100 || x <0||y<0)
         return 1;
-    if(w->map[y][x].layer == layer &&
+    if (w->map[y][x].layer == layer &&
             w->map[y][x].block != 0)
         return 1;
 
-    if(layer == -1)
+    if (layer == -1)
         return 0;
 
-    for(i= 0; i<500; i++)
+    for (i= 0; i<500; i++)
     {
         Object * o = &(w->objs[i]);
-        if(o->exist == 0)
+        if (o->exist == 0)
             continue;
-        if(o->x == x &&
+        if (o->x == x &&
                 o->y == y &&
                 o->shape.layer == layer&&
                 o->shape.block != 0)
@@ -185,4 +185,5 @@ int check_block(World * w, int x, int y,int layer)
     }
     return 0;
 }
+
 

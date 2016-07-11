@@ -1,6 +1,5 @@
 #ifndef PROTO_WORLD_H
 #define PROTO_WORLD_H
-#include "game.h"
 extern int  check_block(World * w, int x, int y,int layer);
 extern int  get_empty_obj_index(World *w);
 extern int  delete_cell(World * w, int x, int y);
