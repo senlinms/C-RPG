@@ -1,11 +1,6 @@
-
 add ui: blink direction indicator
-
 apply new tick system(need faster tick)
-
 imitate starcraft use map setting game
-
 a* algorithm
-
 get_cell_layer optimize
 heal - spread heals 5x5 size
