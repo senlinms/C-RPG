@@ -5,7 +5,6 @@ apply new tick system(need faster tick)
 
 imitate starcraft use map setting game
 
-follow object system
 a* algorithm
 
 get_cell_layer optimize
