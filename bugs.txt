@@ -1,1 +1,0 @@
-obj_enemy.txt의 type을 hero로 바꾸면 주인공이든 뭐든 다 맘대로 움직임(에너미의 tick_fn실행)
