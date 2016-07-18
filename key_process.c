@@ -18,6 +18,7 @@ void key_shortcut_6(Object *);
 void key_shortcut_7(Object *);
 void key_shortcut_8(Object *);
 void key_shortcut_9(Object *);
+void key_quit(Object *);
 
 fn_name_pair key_fn_table[100] ={
     {"up","move_up",		key_move_up},
@@ -39,9 +40,13 @@ fn_name_pair key_fn_table[100] ={
     {"7","shortcut_7",key_shortcut_7},
     {"8","shortcut_8",key_shortcut_8},
     {"9","shortcut_9",key_shortcut_9},
-    {"","",0},
+    {"q","quit",key_quit},
+	{"","",0},
 };
-
+void key_quit(Object * obj)
+{
+	exit(0);
+}
 char* key_name(int key)
 {
     if (key == 0 || key == 0xe0)

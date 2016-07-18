@@ -1,0 +1,546 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 44.26      0.27     0.27      336     0.80     0.83  tick_self
+ 14.75      0.36     0.09    17136     0.01     0.01  fn_do_rand
+ 11.48      0.43     0.07      335     0.21     0.21  fps
+  6.56      0.47     0.04      336     0.12     0.12  tick_overlap
+  3.28      0.49     0.02      576     0.03     0.03  mk_fire
+  3.28      0.51     0.02                             __chkstk_ms
+  3.28      0.53     0.02                             vsnprintf
+  1.64      0.54     0.01   599118     0.00     0.00  get_cell_layer
+  1.64      0.55     0.01     1508     0.01     0.01  obj_move
+  1.64      0.56     0.01      704     0.01     0.01  get_empty_obj_index
+  1.64      0.57     0.01      576     0.02     0.02  fn_death_drop
+  1.64      0.58     0.01        1    10.00    10.00  scene_map
+  1.64      0.59     0.01                             __pformat_int
+  1.64      0.60     0.01                             __pformat_putc
+  1.64      0.61     0.01                             rand
+  0.00      0.61     0.00   449967     0.00     0.00  set_cell
+  0.00      0.61     0.00    11101     0.00     0.00  set_str
+  0.00      0.61     0.00     4033     0.00     0.00  act
+  0.00      0.61     0.00     2653     0.00     0.00  same_until_char
+  0.00      0.61     0.00     2228     0.00     0.00  fn_bomb_timer
+  0.00      0.61     0.00     1602     0.00     0.00  fn_fire_timer
+  0.00      0.61     0.00     1508     0.00     0.00  check_block
+  0.00      0.61     0.00     1292     0.00     0.00  fn_damage
+  0.00      0.61     0.00      718     0.00     0.00  char_pos_ith
+  0.00      0.61     0.00      672     0.00     0.00  print_gauge
+  0.00      0.61     0.00      666     0.00     0.00  mk_dummy
+  0.00      0.61     0.00      665     0.00     0.04  new_obj
+  0.00      0.61     0.00      398     0.00     0.00  get_line
+  0.00      0.61     0.00      359     0.00     0.00  set_obj_with_line
+  0.00      0.61     0.00      359     0.00     0.00  str_len_char
+  0.00      0.61     0.00      336     0.00     0.03  draw
+  0.00      0.61     0.00      336     0.00     0.00  draw_info
+  0.00      0.61     0.00      336     0.00     0.24  game_update
+  0.00      0.61     0.00      336     0.00     0.00  key_process
+  0.00      0.61     0.00      336     0.00     0.00  obj_at
+  0.00      0.61     0.00      336     0.00     0.00  print_mode
+  0.00      0.61     0.00      336     0.00     0.00  print_mode_name
+  0.00      0.61     0.00      336     0.00     0.00  print_mode_slots
+  0.00      0.61     0.00      336     0.00     0.00  print_notice
+  0.00      0.61     0.00      336     0.00     0.00  table_key_process
+  0.00      0.61     0.00      336     0.00     0.12  tick
+  0.00      0.61     0.00      336     0.00     0.00  write_scr
+  0.00      0.61     0.00      131     0.00     0.00  key_name
+  0.00      0.61     0.00       74     0.00     0.01  key_move_down
+  0.00      0.61     0.00       65     0.00     0.00  add_slot
+  0.00      0.61     0.00       65     0.00     0.00  find_empty_slot
+  0.00      0.61     0.00       50     0.00     0.00  mk_enemy
+  0.00      0.61     0.00       40     0.00     0.00  table_obj_fn_by_long_name
+  0.00      0.61     0.00       39     0.00     0.00  mod_obj_with_buf
+  0.00      0.61     0.00       38     0.00     0.00  main
+  0.00      0.61     0.00       38     0.00     0.00  mk_bomb
+  0.00      0.61     0.00       38     0.00     0.01  new_mk_obj
+  0.00      0.61     0.00       33     0.00     0.01  key_move_right
+  0.00      0.61     0.00       32     0.00     0.00  key_shortcut_9
+  0.00      0.61     0.00       32     0.00     0.00  set_color
+  0.00      0.61     0.00       30     0.00     0.00  fn_root_me
+  0.00      0.61     0.00       18     0.00     0.01  key_move_left
+  0.00      0.61     0.00       16     0.00     0.00  gotoxy
+  0.00      0.61     0.00        5     0.00     0.01  key_move_up
+  0.00      0.61     0.00        1     0.00     0.00  act_debug
+  0.00      0.61     0.00        1     0.00     0.00  debug_quit
+  0.00      0.61     0.00        1     0.00     0.00  fn_by_name
+  0.00      0.61     0.00        1     0.00     0.01  game_init
+  0.00      0.61     0.00        1     0.00     0.00  key_shortcut_8
+  0.00      0.61     0.00        1     0.00     0.00  long_name
+  0.00      0.61     0.00        1     0.00     0.00  mk_hero
+  0.00      0.61     0.00        1     0.00     0.01  new_obj_from
+  0.00      0.61     0.00        1     0.00     0.00  table_act
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 1.64% of 0.61 seconds
+
+index % time    self  children    called     name
+                                 336             tick <cycle 1> [6]
+[1]     45.9    0.27    0.01     336         tick_self <cycle 1> [1]
+                0.01    0.00     576/576         fn_death_drop [15]
+                0.00    0.00    1602/1602        fn_fire_timer [38]
+                               17136             fn_do_rand <cycle 1> [3]
+                                2228             fn_bomb_timer <cycle 1> [37]
+-----------------------------------------------
+                               17136             tick_self <cycle 1> [1]
+[3]     16.2    0.09    0.01   17136         fn_do_rand <cycle 1> [3]
+                0.01    0.00    1376/1508        obj_move [13]
+                                  38             new_obj <cycle 1> [8]
+-----------------------------------------------
+                                 336             scene_map <cycle 1> [17]
+[4]     13.3    0.00    0.08     336         game_update <cycle 1> [4]
+                0.07    0.00     335/335         fps [5]
+                0.00    0.01     336/336         draw [16]
+                0.00    0.00     336/336         key_process [21]
+                                 336             tick <cycle 1> [6]
+-----------------------------------------------
+                0.07    0.00     335/335         game_update <cycle 1> [4]
+[5]     11.5    0.07    0.00     335         fps [5]
+                0.00    0.00      32/32          set_color [61]
+                0.00    0.00      32/32          key_shortcut_9 [60]
+                0.00    0.00      16/16          gotoxy [63]
+-----------------------------------------------
+                                 336             game_update <cycle 1> [4]
+[6]      6.6    0.00    0.04     336         tick <cycle 1> [6]
+                0.04    0.00     336/336         tick_overlap [7]
+                                 336             tick_self <cycle 1> [1]
+-----------------------------------------------
+                0.04    0.00     336/336         tick <cycle 1> [6]
+[7]      6.6    0.04    0.00     336         tick_overlap [7]
+                0.00    0.00    1292/1292        fn_damage [40]
+                0.00    0.00      30/30          fn_root_me [62]
+-----------------------------------------------
+                                  38             fn_do_rand <cycle 1> [3]
+                                  51             game_init <cycle 1> [28]
+                                 576             fn_bomb_timer <cycle 1> [37]
+[8]      4.8    0.00    0.03     665         new_obj <cycle 1> [8]
+                0.02    0.00     576/576         mk_fire [9]
+                0.01    0.00     665/704         get_empty_obj_index [14]
+                0.00    0.00      50/50          mk_enemy [56]
+                0.00    0.00       1/1           mk_hero [69]
+                                  38             mk_bomb <cycle 1> [59]
+-----------------------------------------------
+                0.02    0.00     576/576         new_obj <cycle 1> [8]
+[9]      3.3    0.02    0.00     576         mk_fire [9]
+                0.00    0.00     576/666         mk_dummy [43]
+-----------------------------------------------
+                                                 <spontaneous>
+[10]     3.3    0.02    0.00                 __chkstk_ms [10]
+-----------------------------------------------
+                                                 <spontaneous>
+[11]     3.3    0.02    0.00                 vsnprintf [11]
+-----------------------------------------------
+                0.01    0.00  599118/599118      draw [16]
+[12]     1.6    0.01    0.00  599118         get_cell_layer [12]
+-----------------------------------------------
+                0.00    0.00       2/1508        set_obj_with_line [30]
+                0.00    0.00       5/1508        key_move_up [27]
+                0.00    0.00      18/1508        key_move_left [26]
+                0.00    0.00      33/1508        key_move_right [25]
+                0.00    0.00      74/1508        key_move_down [24]
+                0.01    0.00    1376/1508        fn_do_rand <cycle 1> [3]
+[13]     1.6    0.01    0.00    1508         obj_move [13]
+                0.00    0.00    1508/1508        check_block [39]
+-----------------------------------------------
+                0.00    0.00       1/704         new_obj_from [29]
+                0.00    0.00      38/704         new_mk_obj <cycle 1> [23]
+                0.01    0.00     665/704         new_obj <cycle 1> [8]
+[14]     1.6    0.01    0.00     704         get_empty_obj_index [14]
+-----------------------------------------------
+                0.01    0.00     576/576         tick_self <cycle 1> [1]
+[15]     1.6    0.01    0.00     576         fn_death_drop [15]
+-----------------------------------------------
+                0.00    0.01     336/336         game_update <cycle 1> [4]
+[16]     1.6    0.00    0.01     336         draw [16]
+                0.01    0.00  599118/599118      get_cell_layer [12]
+                0.00    0.00  403200/449967      set_cell [33]
+                0.00    0.00     672/4033        act [35]
+                0.00    0.00     672/11101       set_str [34]
+                0.00    0.00     672/672         print_gauge [42]
+                0.00    0.00     336/336         print_mode [48]
+                0.00    0.00     336/336         print_notice [51]
+                0.00    0.00     336/336         draw_info [46]
+                0.00    0.00     336/336         write_scr [52]
+-----------------------------------------------
+                                   1             main <cycle 1> [58]
+[17]     1.6    0.01    0.00       1         scene_map <cycle 1> [17]
+                                 336             game_update <cycle 1> [4]
+-----------------------------------------------
+                                                 <spontaneous>
+[18]     1.6    0.01    0.00                 __pformat_int [18]
+-----------------------------------------------
+                                                 <spontaneous>
+[19]     1.6    0.01    0.00                 __pformat_putc [19]
+-----------------------------------------------
+                                                 <spontaneous>
+[20]     1.6    0.01    0.00                 rand [20]
+-----------------------------------------------
+                0.00    0.00     336/336         game_update <cycle 1> [4]
+[21]     0.1    0.00    0.00     336         key_process [21]
+                0.00    0.00     336/336         table_key_process [22]
+-----------------------------------------------
+                0.00    0.00     336/336         key_process [21]
+[22]     0.1    0.00    0.00     336         table_key_process [22]
+                0.00    0.00      74/74          key_move_down [24]
+                0.00    0.00      33/33          key_move_right [25]
+                0.00    0.00      18/18          key_move_left [26]
+                0.00    0.00       5/5           key_move_up [27]
+                0.00    0.00     131/131         key_name [53]
+                0.00    0.00       1/1           key_shortcut_8 [67]
+-----------------------------------------------
+                                  38             mk_bomb <cycle 1> [59]
+[23]     0.1    0.00    0.00      38         new_mk_obj <cycle 1> [23]
+                0.00    0.00      38/704         get_empty_obj_index [14]
+                0.00    0.00      38/39          mod_obj_with_buf [31]
+                0.00    0.00      38/666         mk_dummy [43]
+                                  38             main <cycle 1> [58]
+-----------------------------------------------
+                0.00    0.00      74/74          table_key_process [22]
+[24]     0.1    0.00    0.00      74         key_move_down [24]
+                0.00    0.00      74/1508        obj_move [13]
+-----------------------------------------------
+                0.00    0.00      33/33          table_key_process [22]
+[25]     0.0    0.00    0.00      33         key_move_right [25]
+                0.00    0.00      33/1508        obj_move [13]
+-----------------------------------------------
+                0.00    0.00      18/18          table_key_process [22]
+[26]     0.0    0.00    0.00      18         key_move_left [26]
+                0.00    0.00      18/1508        obj_move [13]
+-----------------------------------------------
+                0.00    0.00       5/5           table_key_process [22]
+[27]     0.0    0.00    0.00       5         key_move_up [27]
+                0.00    0.00       5/1508        obj_move [13]
+-----------------------------------------------
+                                   1             main <cycle 1> [58]
+[28]     0.0    0.00    0.00       1         game_init <cycle 1> [28]
+                0.00    0.00       1/1           new_obj_from [29]
+                                  51             new_obj <cycle 1> [8]
+-----------------------------------------------
+                0.00    0.00       1/1           game_init <cycle 1> [28]
+[29]     0.0    0.00    0.00       1         new_obj_from [29]
+                0.00    0.00       1/704         get_empty_obj_index [14]
+                0.00    0.00       1/39          mod_obj_with_buf [31]
+                0.00    0.00       1/666         mk_dummy [43]
+-----------------------------------------------
+                0.00    0.00     359/359         mod_obj_with_buf [31]
+[30]     0.0    0.00    0.00     359         set_obj_with_line [30]
+                0.00    0.00       2/1508        obj_move [13]
+                0.00    0.00    2653/2653        same_until_char [36]
+                0.00    0.00     359/718         char_pos_ith [41]
+                0.00    0.00     359/359         str_len_char [45]
+                0.00    0.00      40/40          table_obj_fn_by_long_name [57]
+                0.00    0.00       2/65          add_slot [54]
+-----------------------------------------------
+                0.00    0.00       1/39          new_obj_from [29]
+                0.00    0.00      38/39          new_mk_obj <cycle 1> [23]
+[31]     0.0    0.00    0.00      39         mod_obj_with_buf [31]
+                0.00    0.00     359/359         set_obj_with_line [30]
+                0.00    0.00     398/398         get_line [44]
+-----------------------------------------------
+                0.00    0.00   46767/449967      set_str [34]
+                0.00    0.00  403200/449967      draw [16]
+[33]     0.0    0.00    0.00  449967         set_cell [33]
+-----------------------------------------------
+                0.00    0.00      13/11101       draw_info [46]
+                0.00    0.00     336/11101       print_notice [51]
+                0.00    0.00     336/11101       print_mode_name [49]
+                0.00    0.00     672/11101       draw [16]
+                0.00    0.00    3024/11101       print_mode_slots [50]
+                0.00    0.00    6720/11101       print_gauge [42]
+[34]     0.0    0.00    0.00   11101         set_str [34]
+                0.00    0.00   46767/449967      set_cell [33]
+-----------------------------------------------
+                0.00    0.00       1/4033        key_shortcut_8 [67]
+                0.00    0.00     336/4033        print_mode_name [49]
+                0.00    0.00     672/4033        draw [16]
+                0.00    0.00    3024/4033        print_mode_slots [50]
+[35]     0.0    0.00    0.00    4033         act [35]
+                0.00    0.00       1/1           act_debug [64]
+-----------------------------------------------
+                0.00    0.00    2653/2653        set_obj_with_line [30]
+[36]     0.0    0.00    0.00    2653         same_until_char [36]
+-----------------------------------------------
+                                2228             tick_self <cycle 1> [1]
+[37]     0.0    0.00    0.00    2228         fn_bomb_timer <cycle 1> [37]
+                                 576             new_obj <cycle 1> [8]
+-----------------------------------------------
+                0.00    0.00    1602/1602        tick_self <cycle 1> [1]
+[38]     0.0    0.00    0.00    1602         fn_fire_timer [38]
+-----------------------------------------------
+                0.00    0.00    1508/1508        obj_move [13]
+[39]     0.0    0.00    0.00    1508         check_block [39]
+-----------------------------------------------
+                0.00    0.00    1292/1292        tick_overlap [7]
+[40]     0.0    0.00    0.00    1292         fn_damage [40]
+-----------------------------------------------
+                0.00    0.00     359/718         get_line [44]
+                0.00    0.00     359/718         set_obj_with_line [30]
+[41]     0.0    0.00    0.00     718         char_pos_ith [41]
+-----------------------------------------------
+                0.00    0.00     672/672         draw [16]
+[42]     0.0    0.00    0.00     672         print_gauge [42]
+                0.00    0.00    6720/11101       set_str [34]
+-----------------------------------------------
+                0.00    0.00       1/666         mk_hero [69]
+                0.00    0.00       1/666         new_obj_from [29]
+                0.00    0.00      38/666         new_mk_obj <cycle 1> [23]
+                0.00    0.00      50/666         mk_enemy [56]
+                0.00    0.00     576/666         mk_fire [9]
+[43]     0.0    0.00    0.00     666         mk_dummy [43]
+-----------------------------------------------
+                0.00    0.00     398/398         mod_obj_with_buf [31]
+[44]     0.0    0.00    0.00     398         get_line [44]
+                0.00    0.00     359/718         char_pos_ith [41]
+-----------------------------------------------
+                0.00    0.00     359/359         set_obj_with_line [30]
+[45]     0.0    0.00    0.00     359         str_len_char [45]
+-----------------------------------------------
+                0.00    0.00     336/336         draw [16]
+[46]     0.0    0.00    0.00     336         draw_info [46]
+                0.00    0.00     336/336         obj_at [47]
+                0.00    0.00      13/11101       set_str [34]
+-----------------------------------------------
+                0.00    0.00     336/336         draw_info [46]
+[47]     0.0    0.00    0.00     336         obj_at [47]
+-----------------------------------------------
+                0.00    0.00     336/336         draw [16]
+[48]     0.0    0.00    0.00     336         print_mode [48]
+                0.00    0.00     336/336         print_mode_name [49]
+                0.00    0.00     336/336         print_mode_slots [50]
+-----------------------------------------------
+                0.00    0.00     336/336         print_mode [48]
+[49]     0.0    0.00    0.00     336         print_mode_name [49]
+                0.00    0.00     336/4033        act [35]
+                0.00    0.00     336/11101       set_str [34]
+-----------------------------------------------
+                0.00    0.00     336/336         print_mode [48]
+[50]     0.0    0.00    0.00     336         print_mode_slots [50]
+                0.00    0.00    3024/4033        act [35]
+                0.00    0.00    3024/11101       set_str [34]
+-----------------------------------------------
+                0.00    0.00     336/336         draw [16]
+[51]     0.0    0.00    0.00     336         print_notice [51]
+                0.00    0.00     336/11101       set_str [34]
+-----------------------------------------------
+                0.00    0.00     336/336         draw [16]
+[52]     0.0    0.00    0.00     336         write_scr [52]
+-----------------------------------------------
+                0.00    0.00     131/131         table_key_process [22]
+[53]     0.0    0.00    0.00     131         key_name [53]
+-----------------------------------------------
+                0.00    0.00       2/65          set_obj_with_line [30]
+                0.00    0.00      13/65          mk_hero [69]
+                0.00    0.00      50/65          mk_enemy [56]
+[54]     0.0    0.00    0.00      65         add_slot [54]
+                0.00    0.00      65/65          find_empty_slot [55]
+-----------------------------------------------
+                0.00    0.00      65/65          add_slot [54]
+[55]     0.0    0.00    0.00      65         find_empty_slot [55]
+-----------------------------------------------
+                0.00    0.00      50/50          new_obj <cycle 1> [8]
+[56]     0.0    0.00    0.00      50         mk_enemy [56]
+                0.00    0.00      50/666         mk_dummy [43]
+                0.00    0.00      50/65          add_slot [54]
+-----------------------------------------------
+                0.00    0.00      40/40          set_obj_with_line [30]
+[57]     0.0    0.00    0.00      40         table_obj_fn_by_long_name [57]
+-----------------------------------------------
+                                  38             new_mk_obj <cycle 1> [23]
+[58]     0.0    0.00    0.00      38         main <cycle 1> [58]
+                                   1             game_init <cycle 1> [28]
+                                   1             scene_map <cycle 1> [17]
+-----------------------------------------------
+                                  38             new_obj <cycle 1> [8]
+[59]     0.0    0.00    0.00      38         mk_bomb <cycle 1> [59]
+                                  38             new_mk_obj <cycle 1> [23]
+-----------------------------------------------
+                0.00    0.00      32/32          fps [5]
+[60]     0.0    0.00    0.00      32         key_shortcut_9 [60]
+-----------------------------------------------
+                0.00    0.00      32/32          fps [5]
+[61]     0.0    0.00    0.00      32         set_color [61]
+-----------------------------------------------
+                0.00    0.00      30/30          tick_overlap [7]
+[62]     0.0    0.00    0.00      30         fn_root_me [62]
+-----------------------------------------------
+                0.00    0.00      16/16          fps [5]
+[63]     0.0    0.00    0.00      16         gotoxy [63]
+-----------------------------------------------
+                0.00    0.00       1/1           act [35]
+[64]     0.0    0.00    0.00       1         act_debug [64]
+                0.00    0.00       1/1           long_name [68]
+                0.00    0.00       1/1           table_act [70]
+-----------------------------------------------
+                0.00    0.00       1/1           table_act [70]
+[65]     0.0    0.00    0.00       1         debug_quit [65]
+-----------------------------------------------
+                0.00    0.00       1/1           table_act [70]
+[66]     0.0    0.00    0.00       1         fn_by_name [66]
+-----------------------------------------------
+                0.00    0.00       1/1           table_key_process [22]
+[67]     0.0    0.00    0.00       1         key_shortcut_8 [67]
+                0.00    0.00       1/4033        act [35]
+-----------------------------------------------
+                0.00    0.00       1/1           act_debug [64]
+[68]     0.0    0.00    0.00       1         long_name [68]
+-----------------------------------------------
+                0.00    0.00       1/1           new_obj <cycle 1> [8]
+[69]     0.0    0.00    0.00       1         mk_hero [69]
+                0.00    0.00      13/65          add_slot [54]
+                0.00    0.00       1/666         mk_dummy [43]
+-----------------------------------------------
+                0.00    0.00       1/1           act_debug [64]
+[70]     0.0    0.00    0.00       1         table_act [70]
+                0.00    0.00       1/1           fn_by_name [66]
+                0.00    0.00       1/1           debug_quit [65]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [10] __chkstk_ms            [14] get_empty_obj_index    [13] obj_move
+  [18] __pformat_int          [44] get_line               [42] print_gauge
+  [19] __pformat_putc         [63] gotoxy                 [48] print_mode
+  [35] act                    [24] key_move_down          [49] print_mode_name
+  [64] act_debug              [26] key_move_left          [50] print_mode_slots
+  [54] add_slot               [25] key_move_right         [51] print_notice
+  [41] char_pos_ith           [27] key_move_up            [20] rand
+  [39] check_block            [53] key_name               [36] same_until_char
+  [65] debug_quit             [21] key_process            [17] scene_map
+  [16] draw                   [67] key_shortcut_8         [33] set_cell
+  [46] draw_info              [60] key_shortcut_9         [61] set_color
+  [55] find_empty_slot        [68] long_name              [30] set_obj_with_line
+  [37] fn_bomb_timer          [58] main                   [34] set_str
+  [66] fn_by_name             [59] mk_bomb                [45] str_len_char
+  [40] fn_damage              [43] mk_dummy               [70] table_act
+  [15] fn_death_drop          [56] mk_enemy               [22] table_key_process
+   [3] fn_do_rand              [9] mk_fire                [57] table_obj_fn_by_long_name
+  [38] fn_fire_timer          [69] mk_hero                 [6] tick
+  [62] fn_root_me             [31] mod_obj_with_buf        [7] tick_overlap
+   [5] fps                    [23] new_mk_obj              [1] tick_self
+  [28] game_init               [8] new_obj                [11] vsnprintf
+   [4] game_update            [29] new_obj_from           [52] write_scr
+  [12] get_cell_layer         [47] obj_at                  (2) <cycle 1>

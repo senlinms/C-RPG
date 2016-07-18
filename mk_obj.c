@@ -152,6 +152,7 @@ Object mk_hero(World *w, int x, int y,Object* parent)
     add_slot(&o,"debug","save_world");
     add_slot(&o,"debug","fps+");
     add_slot(&o,"debug","fps-");
+	add_slot(&o,"debug","quit");
 
     add_slot(&o,"skill","heal");
     add_slot(&o,"skill","bomb");

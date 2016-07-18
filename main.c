@@ -107,7 +107,8 @@ void fps()
 	{
 		if (clock() - loop_t1 < (1000/goal_fps) )
 		{
-			Sleep(1);
+			Sleep(5);
+			break;
 		}
 		else
 		{		

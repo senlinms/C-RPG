@@ -9,6 +9,7 @@ void debug_fps_plus(Object * obj);
 void debug_fps_minus(Object * obj);
 void debug_root(Object * obj);
 void debug_interactive_new_cell(Object * obj);
+void debug_quit(Object * obj);
 
 fn_name_pair table_debug[100] =
 {
@@ -20,7 +21,8 @@ fn_name_pair table_debug[100] =
     {"fps+","debug_fps+",debug_fps_plus},
     {"fps-","debug_fps-",debug_fps_minus},
     {"root","debug_root",debug_root},
-    {"interactive_new_cell","debug_interactive_new_cell",debug_interactive_new_cell}
+    {"interactive_new_cell","debug_interactive_new_cell",debug_interactive_new_cell},
+	{"quit","debug_quit",debug_quit}
 };
 
 //long_name임 그냥 name아님
@@ -30,31 +32,48 @@ fnptr fn_by_name(fn_name_pair *table, char* long_name)
         return 0;
     if (table == 0)
         return 0;
+	if(*long_name == 0)
+		return 0;
     for (int i =0; i<100; i++)
     {
         if (table[i].long_name == 0)
+            continue;
+		if (*(table[i].long_name) == 0)
             continue;
         if (!strcmp(table[i].long_name,long_name))
             return table[i].fn;
     }
     return 0;
 }
-int table_act(fn_name_pair *table, Object * obj, char* long_name)
+void table_act(fn_name_pair *table, Object * obj, char* long_name)
 {
     fnptr fn = fn_by_name(table,long_name);
-    if (fn != 0)
+	if(fn ==0)
+	{
+		
+    char buf[64];
+    sprintf(buf,"command %s can not be issued",long_name);
+    set_notice(obj,buf);
+		
+	}	
+	else
+	{
         fn(obj);
 
     char buf[64];
     sprintf(buf,"command %s is issued",long_name);
     set_notice(obj,buf);
+	}
 }
 
 char* long_name(fn_name_pair* table, char* name)
 {
     for (int i =0; i<100; i++)
     {
-        if (!strcmp(table[i].name,name))
+		if(table[i].fn == 0)
+			continue;
+		int len = strlen(name);
+        if (!strncmp(table[i].name,name,len))
             return table[i].long_name;
     }
     return 0;
@@ -68,6 +87,10 @@ int act_debug(Object * obj, char* name)
 ////////////////////////////////////////////
 // debug functions
 ////////////////////////////////////////////
+void debug_quit(Object* obj)
+{
+	exit(0);
+}
 void debug_fly(Object * obj)
 {
     if (obj->shape.layer == 2)
