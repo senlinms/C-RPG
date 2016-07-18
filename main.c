@@ -38,9 +38,7 @@ World * game_init()
     memset(w,0,sizeof(World));
 
     int fill = 80*20;
-
-    new_obj(w,"hero",0,0,0);
-
+	
     for (cy = 0; cy<100; cy++)
     {
         for (cx = 0; cx<100; cx++)
@@ -63,13 +61,13 @@ World * game_init()
         strcpy(c.str,"#");
         w->map[rand()%100][rand()%100] = c;
     }
-    int k = 50;
-    while (k--)
-        new_obj(w,"enemy",rand()%100,rand()%100,0);
+    
+    new_mk_obj("enemy",w,10,10,0);
 
-    int kkk = new_obj_from(w,"./data/obj_kkk.txt",0,0,0);
-    //w->hero = &(w->objs[kkk]);
-    return w;
+    Object * hero_ptr;
+	hero_ptr = new_mk_obj("hero",w,0,0,0);
+	w->hero = hero_ptr;
+	return w;
 }
 
 void fps()
@@ -108,7 +106,6 @@ void fps()
 		if (clock() - loop_t1 < (1000/goal_fps) )
 		{
 			Sleep(5);
-			break;
 		}
 		else
 		{		

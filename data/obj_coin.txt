@@ -1,0 +1,10 @@
+
+shape.str $
+shape.layer 0
+type coin
+shape.fg_color 12
+shape.bg_color 0
+hp 900
+max_hp 900
+fn_overlap overlap_fn_root_me
+

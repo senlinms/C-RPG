@@ -1,0 +1,14 @@
+item coin
+shape.str e
+shape.layer 1
+item book
+type enemy
+shape.fg_color 15
+shape.bg_color 0
+hp 90
+max_hp 90
+mp 80
+max_mp 80
+power 1
+fn_tick obj_fn_move_random
+

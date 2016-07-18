@@ -53,7 +53,7 @@ int fn_explode_bullet(Object *me, Object*other)
     {
         for(cx = -1; cx<=1; cx++)
         {
-            new_obj(me->world,"fire",me->x + cx, me->y + cy,me);
+            new_mk_obj("fire",me->world,me->x + cx, me->y + cy,me);
         }
     }
 

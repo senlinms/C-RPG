@@ -70,7 +70,7 @@ char* long_name(fn_name_pair* table, char* name)
 {
     for (int i =0; i<100; i++)
     {
-		if(table[i].fn == 0)
+		if(table[i].name == 0)
 			continue;
 		int len = strlen(name);
         if (!strncmp(table[i].name,name,len))
@@ -152,7 +152,8 @@ int act_skill(Object * obj, char* name)
     World *w = obj->world;
     if (name==0)
         return 0;
-    new_obj(w, name,hx,hy,obj);
+    //new_obj(w, name,hx,hy,obj);
+	new_mk_obj(name,w,hx,hy,obj);
     char buf[64];
     sprintf(buf,"skill %s is issued",name);
     set_notice(obj,buf);

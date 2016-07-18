@@ -109,7 +109,8 @@ int load_world(World * w, char *file_name)
     {
         if (w->objs[i].exist == 1)
             w->objs[i].world = w;
-        if (w->objs[i].shape.str[0] == '@')
+	//need debugging
+	 if (w->objs[i].shape.str[0] == '@')
             w->hero = &(w->objs[i]);
     }
     return 1;

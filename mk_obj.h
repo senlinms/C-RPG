@@ -10,7 +10,5 @@ extern Object mk_hero(World *w, int x, int y,Object* parent);
 extern Object mk_heal(World*w, int x, int y,Object* parent);
 extern Object mk_coin(World*w, int x, int y,Object* parent);
 extern Object mk_book(World*w, int x, int y,Object* parent);
-extern int new_obj(World * w, char * type, int x, int y, Object* parent);
-
 
 #endif // PROTO_MK_OBJ_H

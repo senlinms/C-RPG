@@ -1,0 +1,11 @@
+shape.str @
+shape.layer 1
+type hero
+shape.fg_color 15
+shape.bg_color 0
+hp 1300
+max_hp 1400
+mp 80
+max_mp 300
+power 3
+debug quit

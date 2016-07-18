@@ -1,0 +1,8 @@
+Q. how to add more in debug slot?
+open ./data/obj_hero.txt
+append "debug quit" without double quote
+replace quit with other debug command
+remember last empty line is required.
+
+
+

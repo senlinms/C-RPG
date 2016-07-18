@@ -64,148 +64,6 @@ Object mk_dummy(World *w, int x, int y,Object* parent)
 
     return o;
 }
-Object mk_bomb(World *w, int x, int y,Object* parent)
-{
-
-    Object* o = new_mk_obj("bomb",w,x,y,parent);
-    return *o;
-}
-Object mk_fire(World *w, int x, int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"*");
-
-    strcpy(o.type , "fire");
-    o.shape.fg_color = 13;
-    o.tick_fn = fn_fire_timer;
-    o.overlap_fn = fn_damage;
-    o.timer = 10;
-    o.shape.layer = 0;
-    o.power = 9;
-    o.hp = 10;
-    o.shape.block = 0;
-    return o;
-}
-Object mk_thru_bullet(World *w, int x, int y, Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"x");
-
-    strcpy(o.type, "thru gun");
-    o.shape.fg_color = 14;
-    o.tick_fn = fn_thru_bullet_timer;
-    o.overlap_fn = fn_damage;
-    o.timer = 15;
-    o.shape.layer = 2;
-    o.power = 30;
-    o.hp = 1;
-    o.shape.block = 0;
-    return o;
-}
-Object mk_explode_bullet(World *w, int x, int y, Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"x");
-
-    strcpy(o.type, "explode-bullet");
-    o.shape.fg_color = 15;
-    o.tick_fn = fn_thru_bullet_timer;
-    o.overlap_fn = fn_explode_bullet;
-    o.timer = 15;
-    o.shape.layer = 2;
-    o.power = 1;
-    o.hp = 1;
-    o.shape.block = 0;
-    return o;
-}
-Object mk_enemy(World * w, int x,int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"e");
-
-    strcpy(o.type , "enemy");
-    o.shape.fg_color = 15;
-    o.tick_fn = fn_do_rand;
-    add_slot(&o,"item","coin");
-    o.shape.layer = 1;
-    o.shape.block = 1;
-    return o;
-}
-Object mk_hero(World *w, int x, int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"@");
-
-    strcpy(o.type , "hero");
-    o.shape.fg_color = 15;
-    o.max_hp = 100;
-    o.max_mp = 100;
-    o.hp = o.max_hp;
-    o.mp = o.max_mp;
-    o.shape.block = 1;
-    o.shape.layer = 1;
-    add_slot(&o,"debug","root");
-    add_slot(&o,"debug","fly");
-    add_slot(&o,"debug","put_wall");
-    add_slot(&o,"debug","put_space");
-    add_slot(&o,"debug","load_world");
-    add_slot(&o,"debug","save_world");
-    add_slot(&o,"debug","fps+");
-    add_slot(&o,"debug","fps-");
-	add_slot(&o,"debug","quit");
-
-    add_slot(&o,"skill","heal");
-    add_slot(&o,"skill","bomb");
-    add_slot(&o,"skill","thru gun");
-    add_slot(&o,"skill","bomb gun");
-    return o;
-}
-Object mk_heal(World*w, int x, int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"~");
-
-    strcpy(o.type , "heal");
-    o.shape.fg_color = 2+8;
-    o.tick_fn = fn_heal_timer;
-    o.overlap_fn = fn_heal;
-    o.timer = 90;
-    o.shape.layer = 0;
-    o.power = 1;
-    o.hp = 10;
-    o.shape.block = 0;
-    return o;
-}
-Object mk_coin(World*w, int x, int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"$");
-    o.shape.fg_color = 6+8;//bright yellow
-    o.tick_fn = 0;
-    strcpy(o.type , "coin");
-    o.overlap_fn = fn_root_me;
-    o.timer = 0;
-    o.shape.layer = 0;
-    o.power = 0;
-    o.hp = 99999999;
-    o.shape.block = 0;
-    return o;
-}
-Object mk_book(World*w, int x, int y,Object* parent)
-{
-    Object o = mk_dummy(w,x,y,parent);
-    strcpy(o.shape.str,"$");
-    o.shape.fg_color = 6;//yellow
-    o.tick_fn = 0;
-    strcpy(o.type , "book");
-    o.overlap_fn = fn_root_me;
-    o.timer = 0;
-    o.shape.layer = 0;
-    o.power = 0;
-    o.hp = 99999999;
-    o.shape.block = 0;
-    return o;
-}
 int char_pos_ith(char* buf,char c, int i)
 {
     int x;
@@ -372,8 +230,6 @@ int set_obj_with_line(Object* o, char* line)
     }
     if (same_until_char(first,"debug ",' '))
     {
-
-
         strncpy(buf,second,len);
         add_slot(o,"debug",buf);
         return 1;
@@ -446,105 +302,6 @@ int mod_obj_with_buf(char * buf,Object* o)
     return 1;
 }
 
-int new_obj_from(World* w, char* file_name,int x, int y,Object * parent)
-{
-    FILE * fp = fopen(file_name,"rb");
-
-    if (fp==0)
-        return 0;
-    char buf[4096];
-    int rpos = fread(buf,1,4096,fp);
-    fseek(fp,0,SEEK_END);
-    int epos = ftell(fp);
-    if (rpos != epos)
-        return 0;
-    Object o = mk_dummy(w,x,y,parent);
-    mod_obj_with_buf(buf,&o);
-    int k = get_empty_obj_index(w);
-    if (k==-1)
-        return -1;
-    w->objs[k] = o;
-
-    if (!strcmp(o.type,"hero"))
-    {
-        w->hero = &(w->objs[k]);
-    }
-    return k;
-}
-
-int new_obj(World * w, char * type, int x, int y, Object* parent)
-{
-    Object o;
-    if (!strcmp(type,"bomb"))
-    {
-        o = mk_bomb(w,x,y,parent);
-    }
-    else if (!strcmp(type,"fire"))
-    {
-        o = mk_fire(w,x,y,parent);
-    }
-    else if (!strcmp(type,"heal"))
-    {
-        o = mk_heal(w,x,y,parent);
-    }
-    else if (!strcmp(type,"enemy"))
-    {
-        o = mk_enemy(w,x,y,parent);
-    }
-    else if (!strcmp(type,"hero"))
-    {
-        o = mk_hero(w,x,y,parent);
-    }
-    else if (!strcmp(type,"coin"))
-    {
-        o = mk_coin(w,x,y,parent);
-    }
-    else if (!strcmp(type,"book"))
-    {
-        o = mk_book(w,x,y,parent);
-    }
-    else if (!strcmp(type,"thru gun"))
-    {
-        if (!strcmp(parent->direction , "left"))
-            o = mk_thru_bullet(w,x-1,y,parent);
-
-        if (!strcmp(parent->direction , "right"))
-            o = mk_thru_bullet(w,x+1,y,parent);
-
-        if (!strcmp(parent->direction , "up"))
-            o = mk_thru_bullet(w,x,y-1,parent);
-
-        if (!strcmp(parent->direction,"down"))
-            o = mk_thru_bullet(w,x,y+1,parent);
-    }
-    else if (!strcmp(type,"bomb gun"))
-    {
-        if (!strcmp(parent->direction , "left"))
-            o = mk_explode_bullet(w,x-1,y,parent);
-
-        if (!strcmp(parent->direction , "right"))
-            o = mk_explode_bullet(w,x+1,y,parent);
-
-        if (!strcmp(parent->direction , "up"))
-            o = mk_explode_bullet(w,x,y-1,parent);
-
-        if (!strcmp(parent->direction,"down"))
-            o = mk_explode_bullet(w,x,y+1,parent);
-    }
-    else
-        return -1;// false
-
-    int k = get_empty_obj_index(w);
-    w->objs[k] = o;
-
-    if (!strcmp(type,"hero"))
-    {
-        w->hero = &(w->objs[k]);
-    }
-    return k;
-}
-
-
 
 
 
@@ -556,17 +313,21 @@ Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
     FILE * fp = fopen(file_name,"rb");
     if (fp==0)
     {
-        printf("unable to open file:%s",file_name);
+		char buf[512];
+        sprintf(buf,"unable to open file:%s",file_name);
+		MessageBox(0,buf,"error",MB_OK);
         exit(1);
         return 0;
     }
 
     char buf[4096];
+	memset(buf,0,sizeof(char)*4096);
     int rpos = fread(buf,1,4096,fp);
     fseek(fp,0,SEEK_END);
     int epos = ftell(fp);
     if (rpos != epos)
         return 0;
+	fclose(fp);
     Object o = mk_dummy(w,x,y,parent);
     mod_obj_with_buf(buf,&o);
     int k = get_empty_obj_index(w);
@@ -575,10 +336,7 @@ Object* new_mk_obj(char* name, World * w, int x, int y, Object* parent)
     if (k==-1)
         return -1;
     w->objs[k] = o;
-    if (!strcmp(o.type,"hero"))
-    {
-        w->hero = &(w->objs[k]);
-    }
+	
     //never return o. o is in stack. therefore it will be deleted when function finished.
     return &(w->objs[k]);
 }

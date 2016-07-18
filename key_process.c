@@ -73,6 +73,8 @@ void table_key_process(fn_name_pair * table, Object * obj)
     char* name = key_name(getch());
     for (int i = 0;i<100;i++)
     {
+		if(table[i].name == 0)
+			continue;
         if (!strcmp(table[i].name,name))
         {
             if (table[i].fn == 0)
@@ -116,7 +118,8 @@ void key_move_right(Object * obj)
 }
 void key_attack(Object * obj)
 {
-    new_obj(obj->world, "bomb",obj->x,obj->y,obj);
+	//   new_obj(obj->world, "bomb",obj->x,obj->y,obj);
+	new_mk_obj("bomb",obj->world,obj->x,obj->y,obj);
     strcpy(obj->last_action,"bomb");
 }
 void key_root(Object *obj)

@@ -27,7 +27,7 @@ int fn_do_rand(Object * o)
     if(r == 4)
     {
         if(rand()%10 == 0)
-            new_obj(o->world,"bomb",o->x,o->y,o);
+            new_mk_obj("bomb",o->world,o->x,o->y,o);
     }
 }
 int fn_fire_timer(Object* o)
@@ -48,7 +48,7 @@ int fn_bomb_timer(Object * o)
         {
             for(cx = -1; cx<=1; cx++)
             {
-                new_obj(o->world,"fire",o->x + cx, o->y + cy,o);
+                new_mk_obj("fire",o->world,o->x + cx, o->y + cy,o);
             }
         }
 
@@ -66,7 +66,7 @@ int fn_death_drop(Object* me)
         char * item = &(me->item_slots[i][0]);
         if(!strcmp(item,""))
             continue;
-        new_obj(me->world,item,me->x,me->y,me);
+        new_mk_obj(item,me->world,me->x,me->y,me);
     }
 }
 
