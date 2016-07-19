@@ -4,5 +4,7 @@ append "debug quit" without double quote
 replace quit with other debug command
 remember last empty line is required.
 
+Q. what are offset_x and offset_y in ./data/obj_x.txt?
+on the object creation, the location of invokation will be adjusted with those values.
 
 

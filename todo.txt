@@ -1,5 +1,7 @@
 make thru bullet object
 make explode bullet object
+make heal object
+(with data text file)
 rearrange sources
 
 
