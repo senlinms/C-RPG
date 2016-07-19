@@ -1,9 +1,6 @@
 #include "game.h"
 
 
-
-
-//long_name임 그냥 name아님
 fnptr fn_by_long_name(fn_name_pair *table, char* long_name)
 {
     if (long_name == 0)

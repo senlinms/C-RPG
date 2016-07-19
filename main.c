@@ -65,37 +65,9 @@ World * game_init()
 	return w;
 }
 
-void fps()
+void tick_sleep()
 {
-    static clock_t fps_t = 0;
-    static clock_t loop_t2;
     static clock_t loop_t1 =0; 
-    static int loop_frame = 0;
-    static int max_fps=0;
-
-
-	loop_frame++;
-    if (fps_t + 1000  <= clock())
-    {
-        gotoxy(0,24);
-        set_color(0,15);
-
-        printf("fps:[%3d] goal_fps:[%3d]",loop_frame,goal_fps);
-        if (loop_frame < goal_fps)
-        {
-            set_color(0,4+8);
-            printf("          ");
-        }
-        if (loop_frame >= goal_fps)
-        {
-            set_color(0,4+8);
-            printf(" [max_fps]");
-        }
-
-        fps_t = clock();
-        loop_frame = 0;
-    }
-	
     while(1)
 	{
 		if (clock() - loop_t1 < (1000/goal_fps) )
@@ -113,7 +85,10 @@ void game_update(World* w)
 {
 
 
+	tick_sleep();
+	
     tick(w);
+	frame_count++;
     if (w->hero->exist == 0 || w->hero->hp<=0)
     {
         scene = scene_game_over;
@@ -121,7 +96,7 @@ void game_update(World* w)
     }
     draw(w);
     key_process(w);
-    fps();
+    
 
 }
 

@@ -43,7 +43,58 @@ void write_scr(CHAR_INFO * buffer, int cx, int cy)
     SMALL_RECT sr = {0,0,cx,cy};
     WriteConsoleOutput(h,buffer,sz,xy,&sr);
 }
+
 void draw(World * w)
+{
+	memset(screen_buffer,0,sizeof(CHAR_INFO)*BUFFER_CX*BUFFER_CY);
+	draw_map(w);
+	draw_system(w);
+	draw_fps();
+	write_scr(screen_buffer,BUFFER_CX,BUFFER_CY);
+}
+void draw_system(World * w)
+{
+	char hp_str[32];
+    sprintf(hp_str,"HP:%7d",w->hero->hp);
+    set_str(screen_buffer,hp_str,62,0,0,4+8);
+    print_gauge(62,1,w->hero->max_hp,w->hero->hp,4+8,4);
+    char mp_str[32];
+    sprintf(mp_str,"MP:%7d",w->hero->mp);
+    set_str(screen_buffer,mp_str,62,2,0,1+8);
+    print_gauge(62,3,w->hero->max_mp,w->hero->mp,1+8,1);
+    print_mode(62,4,w->hero);
+    print_notice(w->hero,0,21);
+    draw_examine(60,20,w,w->hero->x,w->hero->y,w->hero);
+}
+void draw_fps()
+{
+    static clock_t fps_t = 0;
+	static int last_frame_count = 0;
+    if (fps_t + 1000  <= clock())
+    {
+        fps_t = clock();
+		last_frame_count = frame_count;
+        frame_count = 0;
+    }
+	
+	char buf[70];
+	char flag_str[70];
+	
+	if (last_frame_count < goal_fps)
+	{
+		sprintf(flag_str,"");
+	}
+	if (last_frame_count >= goal_fps)
+	{
+		sprintf(flag_str,"[max fps]");
+	}
+
+	sprintf(buf,"fps:[%3d] goal_fps:[%3d]",last_frame_count,goal_fps);
+	set_str(screen_buffer,buf,0,23,0,15);
+	int cur_x = strlen(buf);
+	set_str(screen_buffer,flag_str,0+cur_x,23,0,4+8);
+}
+void draw_map(World * w)
 {
     int cx, cy;
     static Cell * cell_buffer[20][30];
@@ -70,7 +121,6 @@ void draw(World * w)
             cell_buffer[cy][cx] = c;
         }
     }
-    memset(screen_buffer,0,sizeof(CHAR_INFO)*BUFFER_CX*BUFFER_CY);
     for (cy = 0; cy<20; cy++)
     {
         for (cx = 0; cx<30; cx++)
@@ -105,22 +155,12 @@ void draw(World * w)
             }
         }
     }
-    char hp_str[32];
-    sprintf(hp_str,"HP:%7d",w->hero->hp);
-    set_str(screen_buffer,hp_str,62,0,0,4+8);
-    print_gauge(62,1,w->hero->max_hp,w->hero->hp,4+8,4);
-    char mp_str[32];
-    sprintf(mp_str,"MP:%7d",w->hero->mp);
-    set_str(screen_buffer,mp_str,62,2,0,1+8);
-    print_gauge(62,3,w->hero->max_mp,w->hero->mp,1+8,1);
-    print_mode(62,4,w->hero);
-    print_notice(w->hero,0,21);
-    draw_info(60,20,w,w->hero->x,w->hero->y,w->hero);
-    write_scr(screen_buffer,BUFFER_CX,BUFFER_CY);
+    
+    
 }
 
 
-int draw_info(int display_x, int display_y, World* w, int x, int y,Object* exclude)
+int draw_examine(int display_x, int display_y, World* w, int x, int y,Object* exclude)
 {
     Object* obj = obj_at(w,x,y,exclude);
     if (obj==0)

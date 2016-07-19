@@ -4,6 +4,7 @@ make heal object
 (with data text file)
 rearrange sources
 
+improve overlap tick
 
 add ui: blink direction indicator
 apply new tick system(need faster tick)

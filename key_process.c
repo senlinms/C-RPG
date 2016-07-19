@@ -24,10 +24,10 @@ char* key_name(int key)
 }
 void table_key_process(fn_name_pair * table, Object * obj)
 {
-	#ifndef DEBUG
+	
     if (!kbhit())
         return;
-	#endif
+	
     char* name = key_name(getch());
     for (int i = 0;i<100;i++)
     {

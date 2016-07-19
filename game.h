@@ -11,6 +11,7 @@
 
 extern CHAR_INFO screen_buffer[BUFFER_CY][BUFFER_CX];
 extern int goal_fps;
+extern int frame_count;
 struct Object;
 struct Cell;
 struct World;
@@ -130,7 +131,7 @@ extern int  act_item(struct Object * obj, char* name);
 extern void print_mode_slots(int x, int y, struct Object* obj, int max_str_len, char (*slots)[SHORT_STRLEN];);
 extern void print_mode(int x, int y, struct Object *obj);
 extern void print_mode_name(int x,int y,struct Object * obj, char* mode);
-extern int draw_info(int display_x, int display_y, World* w, int x, int y,struct Object* exclude);
+extern int draw_examine(int display_x, int display_y, World* w, int x, int y,struct Object* exclude);
 extern void print_gauge(int x,int y, int max,int current, unsigned char bright_color,unsigned char dark_color);
 extern void draw(struct World * w);
 extern void write_scr(CHAR_INFO * buffer, int cx, int cy);

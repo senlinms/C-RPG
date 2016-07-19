@@ -8,7 +8,7 @@
 
 CHAR_INFO screen_buffer[BUFFER_CY][BUFFER_CX];
 int goal_fps=25;
-
+int frame_count=0;
 
 fn_name_pair table_debug[100] =
 {
