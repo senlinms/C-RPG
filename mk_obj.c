@@ -1,22 +1,8 @@
 #include "game.h"
 //change fn_do_rand to move_random
 //나머지는 모두 0으로 초기화됨
-fn_name_pair table_tick_obj_fn[100] ={
-    {"move_random","obj_fn_move_random",fn_do_rand},
-    {"fire_timer","obj_fn_fire_timer", fn_fire_timer},
-    {"bomb_timer","obj_fn_bomb_timer",fn_bomb_timer},
-    {"thru_bullet_timer","obj_fn_thru_bullet_timer",fn_thru_bullet_timer},
-    {"heal_timer","obj_fn_heal_timer",fn_heal_timer}};
-
-fn_name_pair table_overlap_obj_fn[100] ={
-    {"heal","overlap_fn_heal",fn_heal},
-    {"damage","overlap_fn_damage", fn_damage},
-    {"kill","overlap_fn_kill",fn_kill},
-    {"root_me","overlap_fn_root_me",fn_root_me},
-    {"explode_bullet","overlap_fn_explode_bullet",fn_explode_bullet}};
 
 
-Object* new_mk_obj(char* , World * , int , int , Object* );
 fnptr table_obj_fn_by_long_name(fn_name_pair * table, char* long_name)
 {
     if (long_name == 0)

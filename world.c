@@ -157,12 +157,6 @@ int get_empty_obj_index(World *w)
     }
     return -1;
 }
-#ifdef DEBUG
-int check_block(World * w, int x, int y,int layer)
-{
-	return 0;
-}
-#else
 //layer -1 can go through anywhere
 int check_block(World * w, int x, int y,int layer)
 {
@@ -191,5 +185,3 @@ int check_block(World * w, int x, int y,int layer)
     }
     return 0;
 }
-#endif
-

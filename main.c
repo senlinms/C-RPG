@@ -1,11 +1,6 @@
 
 #include "game.h"
 
-typedef void (*fn_scene)(World*);
-
-fn_scene scene;
-
-void scene_map(World*);
 
 void game_over_update(World* w)
 {

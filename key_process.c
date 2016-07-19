@@ -1,48 +1,4 @@
 #include "game.h"
-void key_move_up(Object *);
-void key_move_down(Object *);
-void key_move_left(Object *);
-void key_move_right(Object *);
-void key_attack(Object *);
-void key_root(Object *);
-void key_skill_mode(Object *);
-void key_item_mode(Object *);
-void key_debug_mode(Object *);
-void key_shortcut_0(Object *);
-void key_shortcut_1(Object *);
-void key_shortcut_2(Object *);
-void key_shortcut_3(Object *);
-void key_shortcut_4(Object *);
-void key_shortcut_5(Object *);
-void key_shortcut_6(Object *);
-void key_shortcut_7(Object *);
-void key_shortcut_8(Object *);
-void key_shortcut_9(Object *);
-void key_quit(Object *);
-
-fn_name_pair key_fn_table[100] ={
-    {"up","move_up",		key_move_up},
-    {"down","move_down",	key_move_down},
-    {"left","move_left",	key_move_left},
-    {"right","move_right",  key_move_right},
-    {" ","attack",	  key_attack},
-    {",","root",	  key_root},
-    {"s","skill_mode",key_skill_mode},
-    {"i","item_mode", key_item_mode},
-    {"d","debug_mode",key_debug_mode},
-    {"0","shortcut_0",key_shortcut_0},
-    {"1","shortcut_1",key_shortcut_1},
-    {"2","shortcut_2",key_shortcut_2},
-    {"3","shortcut_3",key_shortcut_3},
-    {"4","shortcut_4",key_shortcut_4},
-    {"5","shortcut_5",key_shortcut_5},
-    {"6","shortcut_6",key_shortcut_6},
-    {"7","shortcut_7",key_shortcut_7},
-    {"8","shortcut_8",key_shortcut_8},
-    {"9","shortcut_9",key_shortcut_9},
-    {"q","quit",key_quit},
-	{"","",0},
-};
 void key_quit(Object * obj)
 {
 	exit(0);
@@ -68,8 +24,10 @@ char* key_name(int key)
 }
 void table_key_process(fn_name_pair * table, Object * obj)
 {
+	#ifndef DEBUG
     if (!kbhit())
         return;
+	#endif
     char* name = key_name(getch());
     for (int i = 0;i<100;i++)
     {
@@ -118,7 +76,6 @@ void key_move_right(Object * obj)
 }
 void key_attack(Object * obj)
 {
-	//   new_obj(obj->world, "bomb",obj->x,obj->y,obj);
 	new_mk_obj("bomb",obj->world,obj->x,obj->y,obj);
     strcpy(obj->last_action,"bomb");
 }

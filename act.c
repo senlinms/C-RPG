@@ -1,32 +1,10 @@
 #include "game.h"
 
-void debug_fly(Object * obj);
-void debug_put_wall(Object * obj);
-void debug_put_space(Object * obj);
-void debug_load_world(Object * obj);
-void debug_save_world(Object * obj);
-void debug_fps_plus(Object * obj);
-void debug_fps_minus(Object * obj);
-void debug_root(Object * obj);
-void debug_interactive_new_cell(Object * obj);
-void debug_quit(Object * obj);
 
-fn_name_pair table_debug[100] =
-{
-    {"fly","debug_fly",debug_fly},
-    {"put_wall","debug_put_wall", debug_put_wall},
-    {"put_space","debug_put_space",debug_put_space},
-    {"load_world","debug_load_world",debug_load_world},
-    {"save_world","debug_save_world",debug_save_world},
-    {"fps+","debug_fps+",debug_fps_plus},
-    {"fps-","debug_fps-",debug_fps_minus},
-    {"root","debug_root",debug_root},
-    {"interactive_new_cell","debug_interactive_new_cell",debug_interactive_new_cell},
-	{"quit","debug_quit",debug_quit}
-};
+
 
 //long_name임 그냥 name아님
-fnptr fn_by_name(fn_name_pair *table, char* long_name)
+fnptr fn_by_long_name(fn_name_pair *table, char* long_name)
 {
     if (long_name == 0)
         return 0;
@@ -47,8 +25,8 @@ fnptr fn_by_name(fn_name_pair *table, char* long_name)
 }
 void table_act(fn_name_pair *table, Object * obj, char* long_name)
 {
-    fnptr fn = fn_by_name(table,long_name);
-	if(fn ==0)
+    fnptr fn = fn_by_long_name(table,long_name);
+	if(fn ==0 || long_name == 0)
 	{
 		
     char buf[64];
@@ -72,8 +50,8 @@ char* long_name(fn_name_pair* table, char* name)
     {
 		if(table[i].name == 0)
 			continue;
-		int len = strlen(name);
-        if (!strncmp(table[i].name,name,len))
+		
+        if (!strcmp(table[i].name,name))
             return table[i].long_name;
     }
     return 0;
@@ -150,9 +128,8 @@ int act_skill(Object * obj, char* name)
     int hx = obj->x;
     int hy = obj->y;
     World *w = obj->world;
-    if (name==0)
+    if (strlen(name)==0)
         return 0;
-    //new_obj(w, name,hx,hy,obj);
 	new_mk_obj(name,w,hx,hy,obj);
     char buf[64];
     sprintf(buf,"skill %s is issued",name);
