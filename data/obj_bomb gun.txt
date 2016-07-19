@@ -3,8 +3,8 @@ type bomb gun
 shape.fg_color 14
 shape.bg_color 0
 shape.block 0
-fn_tick obj_fn_thru_bullet_timer
-fn_overlap overlap_fn_explode_bullet
+fn_tick fn_thru_bullet_timer
+fn_overlap fn_explode_bullet
 timer 30
 shape.layer 0
 

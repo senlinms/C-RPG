@@ -3,8 +3,8 @@ type heal
 shape.fg_color 14
 shape.bg_color 0
 shape.block 0
-fn_tick obj_fn_heal_timer
-fn_overlap overlap_fn_heal
+fn_tick fn_heal_timer
+fn_overlap fn_heal
 timer 10
 shape.layer 0
 power 1

@@ -1,5 +1,6 @@
 shape.str @
 shape.layer 1
+shape.block 1
 type hero
 shape.fg_color 15
 shape.bg_color 0

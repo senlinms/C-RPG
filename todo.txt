@@ -3,9 +3,14 @@ rearrange sources
 improve overlap tick
 
 add menu: edit map, play map
-
 (later = download and network play)
 
+add map: 
+	starcraft zergling blood
+	tower defense
+	crossing frog
+	
+make decision: support mouse, support only in game map edit, 
 
 add ui: blink direction indicator
 apply new tick system(need faster tick)
