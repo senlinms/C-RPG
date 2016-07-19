@@ -33,3 +33,9 @@ realtime terminal RPG game written in C
 [i] Open item menu
 
 [0~9] Select corresponding item from current menu
+
+# How to build from source
+run build.bat 
+compile routine requires gcc and cproto.
+without source code modification, you can remove cproto line from build.bat file.
+in this case, it requires gcc only. no curses library needed.
