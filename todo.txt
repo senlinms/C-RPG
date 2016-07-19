@@ -1,10 +1,11 @@
-make thru bullet object
-make explode bullet object
-make heal object
-(with data text file)
 rearrange sources
 
 improve overlap tick
+
+add menu: edit map, play map
+
+(later = download and network play)
+
 
 add ui: blink direction indicator
 apply new tick system(need faster tick)
