@@ -17,3 +17,8 @@ debug load_world
 debug put_wall
 debug put_space
 debug quit
+skill heal
+skill bomb
+skill bomb gun
+skill thru gun
+
