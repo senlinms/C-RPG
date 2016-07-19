@@ -1,1 +1,8 @@
-right click => move right, lay bomb repeat. why?
+#1 right click => exit
+if there's 'q' letter in clipboard, and you click with right mouse button, 
+it will paste all letters in clipboard. 
+key_process function will catch all the letter pasted, subsquently exit the program because letter 'q' is for quit
+
+how to regenerate this bug: 
+1. copy 'debug quit'
+2. right click on the game screen

@@ -81,10 +81,10 @@ void key_attack(Object * obj)
 	strcpy(obj->last_action, "bomb");
 }
 
-void key_root(Object * obj)
+void key_loot(Object * obj)
 {
 
-	act_debug(obj, "root");
+	act_debug(obj, "loot");
 }
 
 void key_skill_mode(Object * obj)

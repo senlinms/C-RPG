@@ -20,10 +20,10 @@ int fn_kill(Object * me, Object * other)
 	other->exist = 0;
 }
 
-int fn_root_me(Object * me, Object * other)
+int fn_loot_me(Object * me, Object * other)
 {
 	if (me->exist == 1) {
-		if (strcmp(other->last_action, "root"))
+		if (strcmp(other->last_action, "loot"))
 			return 0;
 		if (num_of_empty_slot(other, other->item_slots) < 1) {
 			char buf[64];
@@ -37,7 +37,7 @@ int fn_root_me(Object * me, Object * other)
 		strcpy(other->last_action, "none");
 
 		char buf[64];
-		sprintf(buf, "you rooted [%s]", me->type);
+		sprintf(buf, "you looted [%s]", me->type);
 		set_notice(other, buf);
 		return 1;
 	}

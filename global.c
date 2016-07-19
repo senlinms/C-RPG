@@ -18,7 +18,7 @@ fn_name_pair table_debug[100] = {
 	{"save_world", "debug_save_world", debug_save_world},
 	{"fps+", "debug_fps+", debug_fps_plus},
 	{"fps-", "debug_fps-", debug_fps_minus},
-	{"root", "debug_root", debug_root},
+	{"loot", "debug_loot", debug_loot},
 	{"interactive_new_cell", "debug_interactive_new_cell",
 	 debug_interactive_new_cell},
 	{"quit", "debug_quit", debug_quit}
@@ -30,7 +30,7 @@ fn_name_pair key_fn_table[100] = {
 	{"left", "move_left", key_move_left},
 	{"right", "move_right", key_move_right},
 	{" ", "attack", key_attack},
-	{",", "root", key_root},
+	{",", "loot", key_loot},
 	{"s", "skill_mode", key_skill_mode},
 	{"i", "item_mode", key_item_mode},
 	{"d", "debug_mode", key_debug_mode},
@@ -61,7 +61,7 @@ fn_name_pair table_overlap_obj_fn[100] = {
 	{"heal", "overlap_fn_heal", fn_heal},
 	{"damage", "overlap_fn_damage", fn_damage},
 	{"kill", "overlap_fn_kill", fn_kill},
-	{"root_me", "overlap_fn_root_me", fn_root_me},
+	{"loot_me", "overlap_fn_loot_me", fn_loot_me},
 	{"explode_bullet", "overlap_fn_explode_bullet", fn_explode_bullet}
 };
 

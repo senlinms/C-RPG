@@ -8,4 +8,12 @@ max_hp 1400
 mp 80
 max_mp 300
 power 3
+debug fly
+debug loot
+debug fps+
+debug fps-
+debug save_world
+debug load_world
+debug put_wall
+debug put_space
 debug quit

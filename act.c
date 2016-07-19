@@ -114,9 +114,9 @@ void debug_fps_minus(Object * obj)
 		goal_fps = 10;
 }
 
-void debug_root(Object * obj)
+void debug_loot(Object * obj)
 {
-	strcpy(obj->last_action, "root");
+	strcpy(obj->last_action, "loot");
 }
 
 void debug_interactive_new_cell(Object * obj)
