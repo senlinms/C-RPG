@@ -17,7 +17,7 @@ int fn_damage(Object * me, Object * other)
 
 int fn_kill(Object * me, Object * other)
 {
-	other->exist = 0;
+	delete_object(other);
 }
 
 int fn_loot_me(Object * me, Object * other)
@@ -32,7 +32,7 @@ int fn_loot_me(Object * me, Object * other)
 			return 0;
 		}
 		add_slot(other, "item", me->type);
-		me->exist = 0;
+		delete_object(me);
 
 		strcpy(other->last_action, "none");
 
@@ -55,5 +55,5 @@ int fn_explode_bullet(Object * me, Object * other)
 		}
 	}
 
-	me->exist = 0;
+	delete_object(me);
 }

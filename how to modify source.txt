@@ -8,3 +8,9 @@ Q. what are offset_x and offset_y in ./data/obj_x.txt?
 on the object creation, the location of invokation will be adjusted with those values.
 
 
+
+
+delete_object should be used when delete Object. 
+delete_object will defragment object array so that no deleted object will be between alive object. 
+this make it easy to set last object index. 
+if last object index is known, there's no need to loop 500x500 times.

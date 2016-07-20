@@ -3,7 +3,7 @@ int fn_heal_timer(Object * o)
 {
 	o->timer -= 1;
 	if (o->timer <= 0)
-		o->exist = 0;
+		delete_object(o);
 }
 
 int fn_do_rand(Object * o)
@@ -31,7 +31,7 @@ int fn_fire_timer(Object * o)
 {
 	o->timer -= 1;
 	if (o->timer <= 0)
-		o->exist = 0;
+		delete_object(o);
 }
 
 int fn_bomb_timer(Object * o)
@@ -48,7 +48,7 @@ int fn_bomb_timer(Object * o)
 			}
 		}
 
-		o->exist = 0;
+		delete_object(o);
 	}
 
 }
@@ -68,7 +68,7 @@ int fn_thru_bullet_timer(Object * me)
 {
 	me->timer--;
 	if (me->timer <= 0)
-		me->exist = 0;
+		delete_object(me);
 	if (!strcmp(me->direction, "left"))
 		obj_move(me->world, me, -1, 0);
 	if (!strcmp(me->direction, "right"))

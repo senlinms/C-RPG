@@ -1,12 +1,15 @@
 item coin
+item book
+item coin
+item book
 shape.str e
 shape.layer 1
 shape.block 1
-item book
+
 type enemy
 shape.fg_color 15
 shape.bg_color 0
-hp 90
+hp 1
 max_hp 90
 mp 80
 max_mp 80

@@ -35,7 +35,7 @@ void tick_self(World * w)
 				if (obj->death_fn != 0)
 					obj->death_fn(obj);
 
-				obj->exist = 0;
+				delete_object(obj);
 
 			}
 		}
