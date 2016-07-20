@@ -12,6 +12,8 @@ add map:
 	
 make decision: support mouse, support only in game map edit, 
 
+state effect: poison(reduce hp), damaged(red blink), 
+
 add ui: blink direction indicator
 apply new tick system(need faster tick)
 imitate starcraft use map setting game
