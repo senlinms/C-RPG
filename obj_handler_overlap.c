@@ -10,6 +10,10 @@ int fn_heal(Object * me, Object * other)
 
 int fn_damage(Object * me, Object * other)
 {
+	//bullet should not damage shooter
+	if(me->parent == other)
+		return other->hp;
+	
 	int damage = me->power;
 	other->hp -= damage;
 	return other->hp;
@@ -48,7 +52,9 @@ int fn_loot_me(Object * me, Object * other)
 
 int fn_explode_bullet(Object * me, Object * other)
 {
-
+	//bullet should not explode shooter
+	if(me->parent == other)
+		return 0;
 	int cy, cx;
 	for (cy = -1; cy <= 1; cy++) {
 		for (cx = -1; cx <= 1; cx++) {
@@ -58,4 +64,5 @@ int fn_explode_bullet(Object * me, Object * other)
 	}
 
 	delete_object(me);
+	return 1;
 }

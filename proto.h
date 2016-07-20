@@ -77,7 +77,7 @@ int mod_obj_with_buf(char *buf, Object *o);
 Object *new_mk_obj(char *name, World *w, int x, int y, Object *parent);
 /* obj.c */
 void set_notice(Object *obj, char *notice);
-void obj_move(World *w, Object *o, int ox, int oy);
+int obj_move(World *w, Object *o, int ox, int oy);
 int object_to_index(Object *obj);
 int reverse_find_valid_obj_index(World *w);
 void delete_object(Object *obj);

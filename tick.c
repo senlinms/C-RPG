@@ -2,8 +2,20 @@
 void tick_overlap(World * w)
 {
 	int i, j;
-	for (i = 0; i < 500; i++) {
-		for (j = 0; j < 500; j++) {
+	w->last_obj_index =0;
+	//improve later
+	//can be improved by count object on creation and deletion
+	for(i = 0;i<500;i++)
+	{
+		if(w->objs[i].exist == 1)
+			w->last_obj_index++;
+		else
+			break;
+	}
+	int max_i = w->last_obj_index;
+	
+	for (i = 0; i <= max_i; i++) {
+		for (j = 0; j < max_i; j++) {
 			Object *obj = &(w->objs[i]);
 			Object *obj2 = &(w->objs[j]);
 
@@ -30,16 +42,14 @@ void tick_self(World * w)
 			continue;
 		if (obj->tick_fn != 0)
 			obj->tick_fn(obj);
-		if (obj->hp <= 0) {
-			if (obj->exist == 1) {
+		if ((obj->hp <= 0) && (obj->exist == 1))
+		{
 				if (obj->death_fn != 0)
 					obj->death_fn(obj);
 
 				delete_object(obj);
 
-			}
 		}
-
 	}
 }
 

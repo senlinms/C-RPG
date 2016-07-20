@@ -72,6 +72,7 @@ typedef struct World
     struct Cell map[100][100];
     struct Object objs[500];
     struct Object * hero;
+	int last_obj_index;
 } World;
 
 extern fn_name_pair table_debug[100];
