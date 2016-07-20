@@ -1,4 +1,4 @@
-implement linked list for Object *
+search delete_object function and see if deleted object's pointer is used afterwards
 improve overlap tick
 rearrange sources
 

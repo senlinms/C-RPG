@@ -32,13 +32,15 @@ int fn_loot_me(Object * me, Object * other)
 			return 0;
 		}
 		add_slot(other, "item", me->type);
-		delete_object(me);
-
+		
 		strcpy(other->last_action, "none");
 
 		char buf[64];
 		sprintf(buf, "you looted [%s]", me->type);
 		set_notice(other, buf);
+		//there should not be deleted object pointer usage after delete_object(me) 
+		delete_object(me);
+
 		return 1;
 	}
 	return 0;
