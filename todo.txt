@@ -1,6 +1,6 @@
-rearrange sources
-
+implement linked list for Object *
 improve overlap tick
+rearrange sources
 
 add menu: edit map, play map
 (later = download and network play)
