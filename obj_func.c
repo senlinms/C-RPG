@@ -1,24 +1,36 @@
 #include "game.h"
 
-void state_tick(Object * o)
+int find_empty_slot(Object * obj, char *mode)
 {
+	char (*slots)[SHORT_STRLEN];
+	if (!strcmp(mode, "debug"))
+		slots = obj->debug_slots;
+	else if (!strcmp(mode, "skill"))
+		slots = obj->skill_slots;
+	else if (!strcmp(mode, "item"))
+		slots = obj->item_slots;
+	else
+		return -1;
 	int i;
-	//reduce 100 to 10 later
-	for(i=0;i<100;i++)
-	{
-		//assume fragmented
-		if(o->state[i]==0)
-			continue;
-		if(o->state[i]->fn_tick_condition(o))
-			o->state[i]->fn_tick(o);
-		else
-		{
-			o->state[i]->fn_terminate(o);
-			o->state[i] = 0;
-		}		
+	for (i = 0; i < 10; i++) {
+		if (!strcmp(slots[i], ""))
+			return i;
 	}
+	return -1;
 }
-state_slot * find_slot(state_slot* table, char* name)
+
+int num_of_empty_slot(Object * obj, char (*slots)[SHORT_STRLEN])
+{
+	int empty = 0;
+	int i;
+	for (i = 0; i < 10; i++) {
+		if (!strcmp(slots[i], ""))
+			empty++;
+	}
+	return empty;
+}
+
+state_slot *find_slot(state_slot * table, char *name)
 {
 	if (name == 0)
 		return 0;
@@ -32,24 +44,25 @@ state_slot * find_slot(state_slot* table, char* name)
 	}
 	return 0;
 }
-int empty_state_slot_index(Object *o)
+
+int empty_state_slot_index(Object * o)
 {
 	int i;
-	for(i=0;i<100;i++)
-	{
-		if(o->state[i]==0)
+	for (i = 0; i < 100; i++) {
+		if (o->state[i] == 0)
 			return i;
 	}
 	return -1;
 }
-int set_state(Object * o, state_slot * table, char* name)
+
+int set_state(Object * o, state_slot * table, char *name)
 {
-	state_slot * slot  = find_slot(table, name);
+	state_slot *slot = find_slot(table, name);
 	int index = empty_state_slot_index(o);
-	if(index == -1)
+	if (index == -1)
 		return 0;
 	o->state[index] = slot;
-	slot->fn_initial(o);	
+	slot->fn_initial(o);
 	return 1;
 }
 
@@ -67,7 +80,7 @@ int obj_move(World * w, Object * o, int ox, int oy)
 	if (o->y < toy)
 		o->direction = "down";
 	if (check_block(w, tox, toy, ol) == 0) {
-		
+
 		o->x = tox;
 		o->y = toy;
 		return 1;
@@ -78,50 +91,51 @@ int obj_move(World * w, Object * o, int ox, int oy)
 int object_to_index(Object * obj)
 {
 	int i;
-	World * w = obj->world;
-	for(i=0;i<500;i++)
-	{
-		if(&(w->objs[i]) == obj)
+	World *w = obj->world;
+	for (i = 0; i < 500; i++) {
+		if (&(w->objs[i]) == obj)
 			return i;
 	}
 	return -1;
 }
-int reverse_find_valid_obj_index(World *w)
+
+int reverse_find_valid_obj_index(World * w)
 {
 	int i;
-	for(i = 500-1;i>=0;i--)
-	{
-		if(w->objs[i].exist == 0)
+	for (i = 500 - 1; i >= 0; i--) {
+		if (w->objs[i].exist == 0)
 			continue;
 		return i;
 	}
 	return -1;
 }
+
 void delete_object(Object * obj)
 {
 	//index will never be -1
 	int index = object_to_index(obj);
-	
-	delete_object_with_index(obj->world,index);
+
+	delete_object_with_index(obj->world, index);
 }
+
 //all Object deletion should use this function
 void delete_object_with_index(World * w, int index)
 {
 	w->objs[index].exist = 0;
-	
+
 	//defragment
 	int alive_obj_index = reverse_find_valid_obj_index(w);
-	if(alive_obj_index == -1)
+	if (alive_obj_index == -1)
 		return;
-	if(index >= alive_obj_index)
+	if (index >= alive_obj_index)
 		return;
-	
+
 	//update hero pointer if defragmented object is hero. without this, 
 	//hero pointer will point somthing wrong and interpreted as non existed object.
 	//improve later. save pointer poiniting its object. use it to replace below line
-	if(&(w->objs[alive_obj_index])== w->hero)
-		w->hero = &(w->objs[index]);	
+	if (&(w->objs[alive_obj_index]) == w->hero)
+		w->hero = &(w->objs[index]);
 	w->objs[index] = w->objs[alive_obj_index];
 	w->objs[alive_obj_index].exist = 0;
-	
+
 }

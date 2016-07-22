@@ -1,4 +1,5 @@
 #include "game.h"
+
 int fn_heal(Object * me, Object * other)
 {
 	if (other->hp >= other->max_hp)
@@ -11,9 +12,9 @@ int fn_heal(Object * me, Object * other)
 int fn_damage(Object * me, Object * other)
 {
 	//bullet should not damage shooter
-	if(me->parent == other)
+	if (me->parent == other)
 		return other->hp;
-	
+
 	int damage = me->power;
 	other->hp -= damage;
 	return other->hp;
@@ -36,7 +37,7 @@ int fn_loot_me(Object * me, Object * other)
 			return 0;
 		}
 		add_slot(other, "item", me->type);
-		
+
 		strcpy(other->last_action, "none");
 
 		char buf[64];
@@ -53,7 +54,7 @@ int fn_loot_me(Object * me, Object * other)
 int fn_explode_bullet(Object * me, Object * other)
 {
 	//bullet should not explode shooter
-	if(me->parent == other)
+	if (me->parent == other)
 		return 0;
 	int cy, cx;
 	for (cy = -1; cy <= 1; cy++) {

@@ -1,35 +1,5 @@
 #include "game.h"
 
-int find_empty_slot(Object * obj, char *mode)
-{
-	char (*slots)[SHORT_STRLEN];
-	if (!strcmp(mode, "debug"))
-		slots = obj->debug_slots;
-	else if (!strcmp(mode, "skill"))
-		slots = obj->skill_slots;
-	else if (!strcmp(mode, "item"))
-		slots = obj->item_slots;
-	else
-		return -1;
-	int i;
-	for (i = 0; i < 10; i++) {
-		if (!strcmp(slots[i], ""))
-			return i;
-	}
-	return -1;
-}
-
-int num_of_empty_slot(Object * obj, char (*slots)[SHORT_STRLEN])
-{
-	int empty = 0;
-	int i;
-	for (i = 0; i < 10; i++) {
-		if (!strcmp(slots[i], ""))
-			empty++;
-	}
-	return empty;
-}
-
 Object *obj_at(World * w, int x, int y, Object * exclude)
 {
 	int i;
@@ -176,8 +146,8 @@ int check_block(World * w, int x, int y, int layer)
 		if (o->exist == 0)
 			continue;
 		if (o->x == x &&
-		    o->y == y && o->shape.layer == layer
-		    && o->shape.block != 0) {
+		    o->y == y && o->shape.layer == layer && o->shape.block != 0)
+		{
 			return 1;
 		}
 	}

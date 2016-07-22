@@ -1,3 +1,6 @@
+make poison effect initial, condition, tick, and terminate function
+apply them
+
 strcmp -> strncmp
 state effect: poison(reduce hp), damaged(red blink), 
 

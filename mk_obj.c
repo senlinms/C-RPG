@@ -223,7 +223,8 @@ int set_obj_with_line(Object * o, char *line)
 
 	if (same_until_char(first, "fn_overlap ", ' ')) {
 		strncpy(buf, second, len);
-		fn_obj fn = table_obj_fn_by_long_name(table_overlap_obj_fn, buf);
+		fn_obj fn =
+		    table_obj_fn_by_long_name(table_overlap_obj_fn, buf);
 		o->overlap_fn = fn;
 		if (fn == 0)
 			return 0;

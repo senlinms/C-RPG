@@ -11,15 +11,15 @@ void game_over_update(World * w)
 	Sleep(100);
 	if (kbhit()) {
 		/*
-		exist should not be accessed directly.
-		here cannot revive, since death will destroy object information.
-		on need, it should be backed up somewhere else and restore
-		*/
+		   exist should not be accessed directly.
+		   here cannot revive, since death will destroy object information.
+		   on need, it should be backed up somewhere else and restore
+		 */
 		/*
-		w->hero->hp = 100;
-		w->hero->exist = 1;
-		scene = scene_map;
-		*/
+		   w->hero->hp = 100;
+		   w->hero->exist = 1;
+		   scene = scene_map;
+		 */
 		exit(0);
 	}
 }

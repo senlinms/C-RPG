@@ -67,9 +67,8 @@ int fn_death_drop(Object * me)
 int fn_thru_bullet_timer(Object * me)
 {
 	me->timer--;
-	int ox=0, oy=0;
-	if (me->timer <= 0)
-	{
+	int ox = 0, oy = 0;
+	if (me->timer <= 0) {
 		delete_object(me);
 		return 0;
 	}
@@ -81,9 +80,9 @@ int fn_thru_bullet_timer(Object * me)
 		oy = -1;
 	if (!strcmp(me->direction, "down"))
 		oy = 1;
-	
+
 	//bullet cannot go forward, delete.
 	//this behavior peculiar to bullet. some magic may need to behave differently.
-	if(obj_move(me->world, me, ox,oy) == 0)
+	if (obj_move(me->world, me, ox, oy) == 0)
 		delete_object(me);
 }

@@ -51,8 +51,9 @@ void key_process(World * w)
 
 void key_debug(Object * obj)
 {
-	set_state(obj,table_state,"poison");
+	set_state(obj, table_state, "poison");
 }
+
 void key_move_up(Object * obj)
 {
 	obj_move(obj->world, obj, 0, -1);

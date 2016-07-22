@@ -7,7 +7,7 @@ fn_obj fn_by_long_name(str_str_fn * table, char *long_name)
 		return 0;
 	if (table == 0)
 		return 0;
-	if (strlen(long_name)== 0)
+	if (strlen(long_name) == 0)
 		return 0;
 	for (int i = 0; i < 100; i++) {
 		if (strlen(table[i].long_name) == 0)

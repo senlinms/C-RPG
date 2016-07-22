@@ -1,5 +1,7 @@
-#ifndef GAME_H_INCLUDED
-#define GAME_H_INCLUDED
+#ifndef GAME_H
+#define GAME_H
+
+
 #include <windows.h>
 #include <conio.h>
 #include <stdio.h>
@@ -9,9 +11,6 @@
 #define BUFFER_CX 80
 #define BUFFER_CY 24
 
-extern CHAR_INFO screen_buffer[BUFFER_CY][BUFFER_CX];
-extern int goal_fps;
-extern int frame_count;
 struct Object;
 struct Cell;
 struct World;
@@ -21,7 +20,7 @@ typedef void (*fn_scene)(struct World*);
 typedef int (*fn_obj)(struct Object * obj);
 typedef int (*fn_obj_obj)(struct Object * obj_me, struct Object * obj_other);
 
-typedef struct
+typedef struct state_slot
 {
 	char *name;
 	fn_obj fn_initial;
@@ -30,7 +29,7 @@ typedef struct
 	fn_obj fn_terminate;
 	
 } state_slot;
-typedef struct 
+typedef struct str_str_fn
 {
 	char* name;
 	char* long_name;
@@ -74,7 +73,7 @@ typedef struct Object
     char debug_slots[10][SHORT_STRLEN];
     char* direction;
     struct Object *parent;
-	state_slot * state[100];
+	struct state_slot * state[100];
 } Object;
 typedef struct World
 {
@@ -83,13 +82,13 @@ typedef struct World
     struct Object * hero;
 	int last_obj_index;
 } World;
-extern state_slot table_state[100];
-extern str_str_fn table_debug[100];
-extern str_str_fn key_fn_table[100];
-extern str_str_fn table_tick_obj_fn[100];
-extern str_str_fn table_overlap_obj_fn[100];
-extern fn_scene scene;
 
+#endif
+
+//build.bat 
+//cproto -DPROTO_H -e -p -v -o proto.h *.c 
+//gcc *.c -static -m32 -std=c11 -w -o game[release].exe
+#ifndef PROTO_H
+#define PROTO_H
 #include "proto.h"
-
 #endif

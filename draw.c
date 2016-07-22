@@ -1,6 +1,5 @@
 #include "game.h"
 
-
 void set_notice(Object * obj, char *notice)
 {
 	strncpy(obj->last_notice, notice, 64);

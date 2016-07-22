@@ -1,9 +1,3 @@
-
-#include <windows.h>
-#include <conio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "game.h"
 
 CHAR_INFO screen_buffer[BUFFER_CY][BUFFER_CX];
@@ -11,8 +5,8 @@ int goal_fps = 25;
 int frame_count = 0;
 
 state_slot table_state[100] = {
-	{"poison",msgbox,msgbox_yes_no,fn_obj_damage,msgbox2},
-	{"",0,0,0,0}
+	{"poison", msgbox, msgbox_yes_no, fn_obj_damage, msgbox2},
+	{"", 0, 0, 0, 0}
 };
 
 str_str_fn table_debug[100] = {
