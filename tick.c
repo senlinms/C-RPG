@@ -81,6 +81,8 @@ void tick_self(World * w)
 	for (i = 0; i < 500; i++) {
 		Object *obj = &(w->objs[i]);
 
+		state_tick(obj);
+		
 		if (obj->exist == 0)
 			continue;
 		if (obj->tick_fn != 0)
@@ -100,4 +102,5 @@ void tick(World * w)
 {
 	tick_self(w);
 	tick_overlap(w);
+	
 }

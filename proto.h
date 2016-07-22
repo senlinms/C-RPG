@@ -1,7 +1,7 @@
 /* act.c */
-fnptr fn_by_long_name(fn_name_pair *table, char *long_name);
-void table_act(fn_name_pair *table, Object *obj, char *long_name);
-char *long_name(fn_name_pair *table, char *name);
+fn_obj fn_by_long_name(str_str_fn *table, char *long_name);
+void table_act(str_str_fn *table, Object *obj, char *long_name);
+char *long_name(str_str_fn *table, char *name);
 int act_debug(Object *obj, char *name);
 void debug_quit(Object *obj);
 void debug_fly(Object *obj);
@@ -16,6 +16,10 @@ void debug_interactive_new_cell(Object *obj);
 int act_skill(Object *obj, char *name);
 int act_item(Object *obj, char *name);
 void act(Object *obj, char *mode, int num);
+/* debug_fn.c */
+int msgbox(Object *o);
+int msgbox_yes_no(Object *o);
+int fn_obj_damage(Object *o);
 /* draw.c */
 void set_notice(Object *obj, char *notice);
 void gotoxy(int x, int y);
@@ -37,8 +41,9 @@ void print_mode_slots(int x, int y, Object *obj, int max_str_len, char (*slots)[
 /* key_process.c */
 void key_quit(Object *obj);
 char *key_name(int key);
-void table_key_process(fn_name_pair *table, Object *obj);
+void table_key_process(str_str_fn *table, Object *obj);
 void key_process(World *w);
+void key_debug(Object *obj);
 void key_move_up(Object *obj);
 void key_move_down(Object *obj);
 void key_move_left(Object *obj);
@@ -67,7 +72,7 @@ void game_update(World *w);
 void scene_map(World *w);
 int main(void);
 /* mk_obj.c */
-fnptr table_obj_fn_by_long_name(fn_name_pair *table, char *long_name);
+fn_obj table_obj_fn_by_long_name(str_str_fn *table, char *long_name);
 Object mk_dummy(World *w, int x, int y, Object *parent);
 int char_pos_ith(char *buf, char c, int i);
 char *get_line(char *buf, int i);
@@ -77,6 +82,10 @@ int set_obj_with_line(Object *o, char *line);
 int mod_obj_with_buf(char *buf, Object *o);
 Object *new_mk_obj(char *name, World *w, int x, int y, Object *parent);
 /* obj_func.c */
+void state_tick(Object *o);
+state_slot *find_slot(state_slot *table, char *name);
+int empty_state_slot_index(Object *o);
+int set_state(Object *o, state_slot *table, char *name);
 int obj_move(World *w, Object *o, int ox, int oy);
 int object_to_index(Object *obj);
 int reverse_find_valid_obj_index(World *w);
@@ -101,7 +110,6 @@ void __OLD_tick_overlap(World *w);
 void tick_self(World *w);
 void tick(World *w);
 /* world.c */
-int find_empty_slot(Object *obj, char *mode);
 int num_of_empty_slot(Object *obj, char (*slots)[32]);
 Object *obj_at(World *w, int x, int y, Object *exclude);
 Cell *get_cell_layer(World *w, int x, int y, int layer);

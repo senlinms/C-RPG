@@ -1,12 +1,13 @@
 #include "game.h"
 
-fnptr fn_by_long_name(fn_name_pair * table, char *long_name)
+fn_obj fn_by_long_name(str_str_fn * table, char *long_name)
 {
+	//possibly 0
 	if (long_name == 0)
 		return 0;
 	if (table == 0)
 		return 0;
-	if (*long_name == 0)
+	if (strlen(long_name)== 0)
 		return 0;
 	for (int i = 0; i < 100; i++) {
 		if (strlen(table[i].long_name) == 0)
@@ -17,9 +18,9 @@ fnptr fn_by_long_name(fn_name_pair * table, char *long_name)
 	return 0;
 }
 
-void table_act(fn_name_pair * table, Object * obj, char *long_name)
+void table_act(str_str_fn * table, Object * obj, char *long_name)
 {
-	fnptr fn = fn_by_long_name(table, long_name);
+	fn_obj fn = fn_by_long_name(table, long_name);
 	if (fn == 0 || long_name == 0) {
 
 		char buf[64];
@@ -35,7 +36,7 @@ void table_act(fn_name_pair * table, Object * obj, char *long_name)
 	}
 }
 
-char *long_name(fn_name_pair * table, char *name)
+char *long_name(str_str_fn * table, char *name)
 {
 	for (int i = 0; i < 100; i++) {
 		if (strlen(table[i].name) == 0)

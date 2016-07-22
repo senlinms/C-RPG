@@ -10,7 +10,12 @@ CHAR_INFO screen_buffer[BUFFER_CY][BUFFER_CX];
 int goal_fps = 25;
 int frame_count = 0;
 
-fn_name_pair table_debug[100] = {
+state_slot table_state[100] = {
+	{"poison",msgbox,msgbox_yes_no,fn_obj_damage,msgbox2},
+	{"",0,0,0,0}
+};
+
+str_str_fn table_debug[100] = {
 	{"fly", "debug_fly", debug_fly},
 	{"put_wall", "debug_put_wall", debug_put_wall},
 	{"put_space", "debug_put_space", debug_put_space},
@@ -24,7 +29,7 @@ fn_name_pair table_debug[100] = {
 	{"quit", "debug_quit", debug_quit}
 };
 
-fn_name_pair key_fn_table[100] = {
+str_str_fn key_fn_table[100] = {
 	{"up", "move_up", key_move_up},
 	{"down", "move_down", key_move_down},
 	{"left", "move_left", key_move_left},
@@ -45,10 +50,11 @@ fn_name_pair key_fn_table[100] = {
 	{"8", "shortcut_8", key_shortcut_8},
 	{"9", "shortcut_9", key_shortcut_9},
 	{"q", "quit", key_quit},
+	{"`", "debug", key_debug},
 	{"", "", 0},
 };
 
-fn_name_pair table_tick_obj_fn[100] = {
+str_str_fn table_tick_obj_fn[100] = {
 	{"move_random", "fn_move_random", fn_do_rand},
 	{"fire_timer", "fn_fire_timer", fn_fire_timer},
 	{"bomb_timer", "fn_bomb_timer", fn_bomb_timer},
@@ -57,7 +63,7 @@ fn_name_pair table_tick_obj_fn[100] = {
 	{"heal_timer", "fn_heal_timer", fn_heal_timer}
 };
 
-fn_name_pair table_overlap_obj_fn[100] = {
+str_str_fn table_overlap_obj_fn[100] = {
 	{"heal", "fn_heal", fn_heal},
 	{"damage", "fn_damage", fn_damage},
 	{"kill", "fn_kill", fn_kill},

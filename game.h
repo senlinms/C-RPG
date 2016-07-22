@@ -18,15 +18,24 @@ struct World;
 
 typedef void (*fn_scene)(struct World*);
 
-typedef int (*fnptr)(struct Object * obj);
-typedef int (*fnptr2)(struct Object * obj_me, struct Object * obj_other);
+typedef int (*fn_obj)(struct Object * obj);
+typedef int (*fn_obj_obj)(struct Object * obj_me, struct Object * obj_other);
 
+typedef struct
+{
+	char *name;
+	fn_obj fn_initial;
+	fn_obj fn_tick_condition;
+	fn_obj fn_tick;
+	fn_obj fn_terminate;
+	
+} state_slot;
 typedef struct 
 {
 	char* name;
 	char* long_name;
-	fnptr fn;
-} fn_name_pair;
+	fn_obj fn;
+} str_str_fn;
 
 typedef struct Cell
 {
@@ -49,9 +58,9 @@ typedef struct Object
     int max_hp,max_mp;
     int power;
     struct Cell shape;
-    fnptr death_fn;
-    fnptr tick_fn;
-    fnptr2 overlap_fn;
+    fn_obj death_fn;
+    fn_obj tick_fn;
+    fn_obj_obj overlap_fn;
 
     int x,y;
     int timer;
@@ -65,7 +74,7 @@ typedef struct Object
     char debug_slots[10][SHORT_STRLEN];
     char* direction;
     struct Object *parent;
-
+	state_slot * state[100];
 } Object;
 typedef struct World
 {
@@ -74,11 +83,11 @@ typedef struct World
     struct Object * hero;
 	int last_obj_index;
 } World;
-
-extern fn_name_pair table_debug[100];
-extern fn_name_pair key_fn_table[100];
-extern fn_name_pair table_tick_obj_fn[100];
-extern fn_name_pair table_overlap_obj_fn[100];
+extern state_slot table_state[100];
+extern str_str_fn table_debug[100];
+extern str_str_fn key_fn_table[100];
+extern str_str_fn table_tick_obj_fn[100];
+extern str_str_fn table_overlap_obj_fn[100];
 extern fn_scene scene;
 
 #include "proto.h"

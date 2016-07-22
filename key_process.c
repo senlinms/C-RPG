@@ -24,7 +24,7 @@ char *key_name(int key)
 	return letter;
 }
 
-void table_key_process(fn_name_pair * table, Object * obj)
+void table_key_process(str_str_fn * table, Object * obj)
 {
 
 	if (!kbhit())
@@ -49,6 +49,10 @@ void key_process(World * w)
 	table_key_process(key_fn_table, obj);
 }
 
+void key_debug(Object * obj)
+{
+	set_state(obj,table_state,"poison");
+}
 void key_move_up(Object * obj)
 {
 	obj_move(obj->world, obj, 0, -1);

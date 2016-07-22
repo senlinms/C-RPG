@@ -1,5 +1,5 @@
 #include "game.h"
-fnptr table_obj_fn_by_long_name(fn_name_pair * table, char *long_name)
+fn_obj table_obj_fn_by_long_name(str_str_fn * table, char *long_name)
 {
 	if (long_name == 0)
 		return 0;
@@ -213,7 +213,7 @@ int set_obj_with_line(Object * o, char *line)
 	if (same_until_char(first, "fn_tick ", ' ')) {
 
 		strncpy(buf, second, len);
-		fnptr fn = table_obj_fn_by_long_name(table_tick_obj_fn, buf);
+		fn_obj fn = table_obj_fn_by_long_name(table_tick_obj_fn, buf);
 		o->tick_fn = fn;
 		if (fn == 0)
 			return 0;
@@ -223,7 +223,7 @@ int set_obj_with_line(Object * o, char *line)
 
 	if (same_until_char(first, "fn_overlap ", ' ')) {
 		strncpy(buf, second, len);
-		fnptr fn = table_obj_fn_by_long_name(table_overlap_obj_fn, buf);
+		fn_obj fn = table_obj_fn_by_long_name(table_overlap_obj_fn, buf);
 		o->overlap_fn = fn;
 		if (fn == 0)
 			return 0;

@@ -1,5 +1,58 @@
 #include "game.h"
 
+void state_tick(Object * o)
+{
+	int i;
+	//reduce 100 to 10 later
+	for(i=0;i<100;i++)
+	{
+		//assume fragmented
+		if(o->state[i]==0)
+			continue;
+		if(o->state[i]->fn_tick_condition(o))
+			o->state[i]->fn_tick(o);
+		else
+		{
+			o->state[i]->fn_terminate(o);
+			o->state[i] = 0;
+		}		
+	}
+}
+state_slot * find_slot(state_slot* table, char* name)
+{
+	if (name == 0)
+		return 0;
+	if (table == 0)
+		return 0;
+	for (int i = 0; i < 100; i++) {
+		if (strlen(table[i].name) == 0)
+			continue;
+		if (!strcmp(table[i].name, name))
+			return &(table[i]);
+	}
+	return 0;
+}
+int empty_state_slot_index(Object *o)
+{
+	int i;
+	for(i=0;i<100;i++)
+	{
+		if(o->state[i]==0)
+			return i;
+	}
+	return -1;
+}
+int set_state(Object * o, state_slot * table, char* name)
+{
+	state_slot * slot  = find_slot(table, name);
+	int index = empty_state_slot_index(o);
+	if(index == -1)
+		return 0;
+	o->state[index] = slot;
+	slot->fn_initial(o);	
+	return 1;
+}
+
 int obj_move(World * w, Object * o, int ox, int oy)
 {
 	int tox = o->x + ox;

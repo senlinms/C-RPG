@@ -1,3 +1,4 @@
+strcmp -> strncmp
 state effect: poison(reduce hp), damaged(red blink), 
 
 add menu: edit map, play map

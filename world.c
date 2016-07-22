@@ -1,4 +1,5 @@
 #include "game.h"
+
 int find_empty_slot(Object * obj, char *mode)
 {
 	char (*slots)[SHORT_STRLEN];
