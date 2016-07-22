@@ -17,6 +17,7 @@ int act_skill(Object *obj, char *name);
 int act_item(Object *obj, char *name);
 void act(Object *obj, char *mode, int num);
 /* draw.c */
+void set_notice(Object *obj, char *notice);
 void gotoxy(int x, int y);
 void set_color(char bg, char fg);
 void print_notice(Object *obj, int x, int y);
@@ -75,8 +76,7 @@ int same_until_char(char *s1, char *s2, char c);
 int set_obj_with_line(Object *o, char *line);
 int mod_obj_with_buf(char *buf, Object *o);
 Object *new_mk_obj(char *name, World *w, int x, int y, Object *parent);
-/* obj.c */
-void set_notice(Object *obj, char *notice);
+/* obj_func.c */
 int obj_move(World *w, Object *o, int ox, int oy);
 int object_to_index(Object *obj);
 int reverse_find_valid_obj_index(World *w);

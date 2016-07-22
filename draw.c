@@ -1,4 +1,11 @@
 #include "game.h"
+
+
+void set_notice(Object * obj, char *notice)
+{
+	strncpy(obj->last_notice, notice, 64);
+}
+
 void gotoxy(int x, int y)
 {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);

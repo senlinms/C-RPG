@@ -1,7 +1,4 @@
 #include "game.h"
-//change fn_do_rand to move_random
-//나머지는 모두 0으로 초기화됨
-
 fnptr table_obj_fn_by_long_name(fn_name_pair * table, char *long_name)
 {
 	if (long_name == 0)
@@ -9,8 +6,7 @@ fnptr table_obj_fn_by_long_name(fn_name_pair * table, char *long_name)
 	if (table == 0)
 		return 0;
 	for (int i = 0; i < 100; i++) {
-		//다른 곳에도 이 오류 처리 추가하기
-		if (table[i].long_name == 0)
+		if (strlen(table[i].long_name) == 0)
 			continue;
 		if (!strcmp(table[i].long_name, long_name))
 			return table[i].fn;

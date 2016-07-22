@@ -1,9 +1,3 @@
-change 500x500 tick overlap loop to size *size loop
-search delete_object function and see if deleted object's pointer is used afterwards
-improve overlap tick
-rearrange sources
-
-
 state effect: poison(reduce hp), damaged(red blink), 
 
 add menu: edit map, play map

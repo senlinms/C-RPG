@@ -9,9 +9,7 @@ fnptr fn_by_long_name(fn_name_pair * table, char *long_name)
 	if (*long_name == 0)
 		return 0;
 	for (int i = 0; i < 100; i++) {
-		if (table[i].long_name == 0)
-			continue;
-		if (*(table[i].long_name) == 0)
+		if (strlen(table[i].long_name) == 0)
 			continue;
 		if (!strcmp(table[i].long_name, long_name))
 			return table[i].fn;
@@ -40,7 +38,7 @@ void table_act(fn_name_pair * table, Object * obj, char *long_name)
 char *long_name(fn_name_pair * table, char *name)
 {
 	for (int i = 0; i < 100; i++) {
-		if (table[i].name == 0)
+		if (strlen(table[i].name) == 0)
 			continue;
 
 		if (!strcmp(table[i].name, name))

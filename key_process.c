@@ -32,7 +32,7 @@ void table_key_process(fn_name_pair * table, Object * obj)
 
 	char *name = key_name(getch());
 	for (int i = 0; i < 100; i++) {
-		if (table[i].name == 0)
+		if (strlen(table[i].name) == 0)
 			continue;
 		if (!strcmp(table[i].name, name)) {
 			if (table[i].fn == 0)
