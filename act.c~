@@ -63,7 +63,7 @@ int debug_quit(Object * obj, Object * obj2)
 	return 1;
 }
 
-int debug_fly(Object * obj ,Object* obj2)
+int debug_fly(Object * obj, Object * obj2)
 {
 	if (obj->shape.layer == 2)
 		obj->shape.layer = 1;
@@ -72,21 +72,21 @@ int debug_fly(Object * obj ,Object* obj2)
 	return 1;
 }
 
-int debug_put_wall(Object * obj ,Object* obj2)
+int debug_put_wall(Object * obj, Object * obj2)
 {
 	Cell c = new_cell('#', 0, 2, 1, 1);
 	put_cell(obj->world, obj->x, obj->y, c);
 	return 1;
 }
 
-int debug_put_space(Object * obj ,Object* obj2)
+int debug_put_space(Object * obj, Object * obj2)
 {
 	Cell c = new_cell('.', 0, 6, 0, 0);
 	put_cell(obj->world, obj->x, obj->y, c);
 	return 1;
 }
 
-int debug_load_world(Object * obj ,Object* obj2)
+int debug_load_world(Object * obj, Object * obj2)
 {
 	load_world(obj->world, "world.bin");
 	gotoxy(0, 0);
@@ -96,7 +96,7 @@ int debug_load_world(Object * obj ,Object* obj2)
 	return 1;
 }
 
-int debug_save_world(Object * obj ,Object* obj2)
+int debug_save_world(Object * obj, Object * obj2)
 {
 	save_world(obj->world, "world.bin");
 	gotoxy(0, 0);
@@ -106,7 +106,7 @@ int debug_save_world(Object * obj ,Object* obj2)
 	return 1;
 }
 
-int debug_fps_plus(Object * obj ,Object* obj2)
+int debug_fps_plus(Object * obj, Object * obj2)
 {
 	goal_fps += 5;
 	if (goal_fps >= FPS_LIMIT)
@@ -114,7 +114,7 @@ int debug_fps_plus(Object * obj ,Object* obj2)
 	return 1;
 }
 
-int debug_fps_minus(Object * obj ,Object* obj2)
+int debug_fps_minus(Object * obj, Object * obj2)
 {
 	goal_fps -= 5;
 	if (goal_fps <= 10)
@@ -122,13 +122,13 @@ int debug_fps_minus(Object * obj ,Object* obj2)
 	return 1;
 }
 
-int debug_loot(Object * obj ,Object* obj2)
+int debug_loot(Object * obj, Object * obj2)
 {
 	strcpy(obj->last_action, "loot");
 	return 1;
 }
 
-int debug_interactive_new_cell(Object * obj ,Object* obj2)
+int debug_interactive_new_cell(Object * obj, Object * obj2)
 {
 	Cell c = interactive_new_cell();
 	put_cell(obj->world, obj->x, obj->y, c);

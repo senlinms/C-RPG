@@ -38,9 +38,6 @@ World *game_init()
 	srand(time(0));
 	World *w = (World *) malloc(sizeof(World));
 	memset(w, 0, sizeof(World));
-
-	int fill = 80 * 20;
-
 	for (cy = 0; cy < 100; cy++) {
 		for (cx = 0; cx < 100; cx++) {
 			w->map[cy][cx].bg_color = 0;

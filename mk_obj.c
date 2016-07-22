@@ -58,6 +58,8 @@ int char_pos_ith(char *buf, char c, int i)
 		}
 
 	}
+	//reach max file size
+	return -1;
 }
 
 char *get_line(char *buf, int i)
@@ -94,8 +96,8 @@ int same_until_char(char *s1, char *s2, char c)
 			return 0;
 		if (s1[i] == s2[i])
 			continue;
-
 	}
+	return 0;
 }
 
 //obj_x.txt need newline at the end!
@@ -286,7 +288,7 @@ Object *new_mk_obj(char *name, World * w, int x, int y, Object * parent)
 	int k = get_empty_obj_index(w);
 
 	if (k == -1)
-		return -1;
+		return 0;
 	w->objs[k] = o;
 
 	//never return o. o is in stack. therefore it will be deleted when function finished.

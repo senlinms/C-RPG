@@ -95,6 +95,10 @@ int put_cell(World * w, int x, int y, Cell c)
 
 Cell interactive_new_cell()
 {
+	//not implemented yet
+	Cell c;
+	memset(&c, 0, sizeof(c));
+	return c;
 }
 
 Cell new_cell(char ch, int bg, int fg, int layer, int block)
@@ -117,6 +121,7 @@ int delete_cell(World * w, int x, int y)
 	w->map[y][x].block = 0;
 	w->map[y][x].bg_color = 0;
 	w->map[y][x].fg_color = 6;
+	return 1;
 }
 
 int get_empty_obj_index(World * w)

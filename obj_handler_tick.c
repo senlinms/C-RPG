@@ -1,12 +1,14 @@
 #include "game.h"
-int fn_heal_timer(Object * o)
+//obj function
+int fn_heal_timer(Object * o, Object * o2)
 {
 	o->timer -= 1;
 	if (o->timer <= 0)
 		delete_object(o);
+	return 1;
 }
 
-int fn_do_rand(Object * o)
+int fn_do_rand(Object * o, Object * o2)
 {
 	int r = rand() % 50;
 	if (r == 0) {
@@ -25,16 +27,18 @@ int fn_do_rand(Object * o)
 		if (rand() % 10 == 0)
 			new_mk_obj("bomb", o->world, o->x, o->y, o);
 	}
+	return 1;
 }
 
-int fn_fire_timer(Object * o)
+int fn_fire_timer(Object * o, Object * o2)
 {
 	o->timer -= 1;
 	if (o->timer <= 0)
 		delete_object(o);
+	return 1;
 }
 
-int fn_bomb_timer(Object * o)
+int fn_bomb_timer(Object * o, Object * o2)
 {
 	o->timer -= 1;
 
@@ -50,10 +54,11 @@ int fn_bomb_timer(Object * o)
 
 		delete_object(o);
 	}
+	return 1;
 
 }
 
-int fn_death_drop(Object * me)
+int fn_death_drop(Object * me, Object * o2)
 {
 	int i;
 	for (i = 0; i < 10; i++) {
@@ -62,9 +67,10 @@ int fn_death_drop(Object * me)
 			continue;
 		new_mk_obj(item, me->world, me->x, me->y, me);
 	}
+	return 1;
 }
 
-int fn_thru_bullet_timer(Object * me)
+int fn_thru_bullet_timer(Object * me, Object * o2)
 {
 	me->timer--;
 	int ox = 0, oy = 0;
@@ -83,6 +89,9 @@ int fn_thru_bullet_timer(Object * me)
 
 	//bullet cannot go forward, delete.
 	//this behavior peculiar to bullet. some magic may need to behave differently.
-	if (obj_move(me->world, me, ox, oy) == 0)
+	if (obj_move(me->world, me, ox, oy) == 0) {
 		delete_object(me);
+		return 0;
+	}
+	return 1;
 }

@@ -54,6 +54,7 @@ int state_tick(Object * o)
 			o->state[i] = 0;
 		}
 	}
+	return 1;
 }
 
 //old tick_overlap. not going to be used.

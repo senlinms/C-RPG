@@ -23,6 +23,7 @@ int fn_damage(Object * me, Object * other)
 int fn_kill(Object * me, Object * other)
 {
 	delete_object(other);
+	return 1;
 }
 
 int fn_loot_me(Object * me, Object * other)
