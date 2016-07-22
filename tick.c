@@ -1,5 +1,36 @@
 #include "game.h"
+
 void tick_overlap(World * w)
+{
+	//static. it's to avoid allocation too many times
+	static Object * arr[100][100];
+	memset(arr,0,sizeof(Object*)*100*100);
+	for(i=0;i<500;i++)
+	{
+		Object * o = &(w->objs[i]);
+		if(o->exist == 0)
+			continue;
+		int x = w->objs[i].x;
+		int y = w->objs[i].y;
+		if(arr[y][x] == 0)
+			arr[y][x] = o;
+		else
+		{
+			Object * o2 = arr[y][x];
+			//TODO: check exist because overlap_fn may change exist value
+			if(o2->overlap_fn != 0)
+				o2->overlap_fn(o2,o);
+			if(o->overlap_fn)
+				
+			
+			
+		}
+		
+	}
+}
+
+//old tick_overlap. not going to be used.
+void __OLD_tick_overlap(World * w)
 {
 	int i, j;
 	w->last_obj_index =0;
