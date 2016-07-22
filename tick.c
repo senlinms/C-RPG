@@ -47,10 +47,10 @@ int state_tick(Object * o)
 		//assume fragmented
 		if (o->state[i] == 0)
 			continue;
-		if (o->state[i]->fn_tick_condition(o))
-			o->state[i]->fn_tick(o);
+		if (o->state[i]->fn_tick_condition(o, 0))
+			o->state[i]->fn_tick(o, 0);
 		else {
-			o->state[i]->fn_terminate(o);
+			o->state[i]->fn_terminate(o, 0);
 			o->state[i] = 0;
 		}
 	}
@@ -100,10 +100,10 @@ void tick_self(World * w)
 		if (obj->exist == 0)
 			continue;
 		if (obj->tick_fn != 0)
-			obj->tick_fn(obj);
+			obj->tick_fn(obj, 0);
 		if ((obj->hp <= 0) && (obj->exist == 1)) {
 			if (obj->death_fn != 0)
-				obj->death_fn(obj);
+				obj->death_fn(obj, 0);
 
 			delete_object(obj);
 

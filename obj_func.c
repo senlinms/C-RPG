@@ -62,7 +62,7 @@ int set_state(Object * o, state_slot * table, char *name)
 	if (index == -1)
 		return 0;
 	o->state[index] = slot;
-	slot->fn_initial(o);
+	slot->fn_initial(o, 0);
 	return 1;
 }
 

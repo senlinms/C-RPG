@@ -1,6 +1,6 @@
 #include "game.h"
 
-fn_obj fn_by_long_name(str_str_fn * table, char *long_name)
+fnptr fn_by_long_name(str_str_fn * table, char *long_name)
 {
 	//possibly 0
 	if (long_name == 0)
@@ -20,7 +20,7 @@ fn_obj fn_by_long_name(str_str_fn * table, char *long_name)
 
 void table_act(str_str_fn * table, Object * obj, char *long_name)
 {
-	fn_obj fn = fn_by_long_name(table, long_name);
+	fnptr fn = fn_by_long_name(table, long_name);
 	if (fn == 0 || long_name == 0) {
 
 		char buf[64];
@@ -28,7 +28,7 @@ void table_act(str_str_fn * table, Object * obj, char *long_name)
 		set_notice(obj, buf);
 
 	} else {
-		fn(obj);
+		fn(obj, 0);
 
 		char buf[64];
 		sprintf(buf, "command %s is issued", long_name);
@@ -51,80 +51,91 @@ char *long_name(str_str_fn * table, char *name)
 int act_debug(Object * obj, char *name)
 {
 	table_act(table_debug, obj, long_name(table_debug, name));
+	return 1;
 }
 
 ////////////////////////////////////////////
 // debug functions
 ////////////////////////////////////////////
-void debug_quit(Object * obj)
+int debug_quit(Object * obj)
 {
 	exit(0);
+	return 1;
 }
 
-void debug_fly(Object * obj)
+int debug_fly(Object * obj)
 {
 	if (obj->shape.layer == 2)
 		obj->shape.layer = 1;
 	else
 		obj->shape.layer = 2;
+	return 1;
 }
 
-void debug_put_wall(Object * obj)
+int debug_put_wall(Object * obj)
 {
 	Cell c = new_cell('#', 0, 2, 1, 1);
 	put_cell(obj->world, obj->x, obj->y, c);
+	return 1;
 }
 
-void debug_put_space(Object * obj)
+int debug_put_space(Object * obj)
 {
 	Cell c = new_cell('.', 0, 6, 0, 0);
 	put_cell(obj->world, obj->x, obj->y, c);
+	return 1;
 }
 
-void debug_load_world(Object * obj)
+int debug_load_world(Object * obj)
 {
 	load_world(obj->world, "world.bin");
 	gotoxy(0, 0);
 	set_color(0, 14);
 	printf("world loaded");
 	Sleep(1000);
+	return 1;
 }
 
-void debug_save_world(Object * obj)
+int debug_save_world(Object * obj)
 {
 	save_world(obj->world, "world.bin");
 	gotoxy(0, 0);
 	set_color(0, 15);
 	printf("world saved");
 	Sleep(1000);
+	return 1;
 }
 
-void debug_fps_plus(Object * obj)
+int debug_fps_plus(Object * obj)
 {
 	goal_fps += 5;
 	if (goal_fps >= FPS_LIMIT)
 		goal_fps = FPS_LIMIT;
+	return 1;
 }
 
-void debug_fps_minus(Object * obj)
+int debug_fps_minus(Object * obj)
 {
 	goal_fps -= 5;
 	if (goal_fps <= 10)
 		goal_fps = 10;
+	return 1;
 }
 
-void debug_loot(Object * obj)
+int debug_loot(Object * obj)
 {
 	strcpy(obj->last_action, "loot");
+	return 1;
 }
 
-void debug_interactive_new_cell(Object * obj)
+int debug_interactive_new_cell(Object * obj)
 {
 	Cell c = interactive_new_cell();
 	put_cell(obj->world, obj->x, obj->y, c);
+	return 1;
 }
 
-int act_skill(Object * obj, char *name)
+int act_skill(Object * obj, char name[SHORT_STRLEN])
 {
 	int hx = obj->x;
 	int hy = obj->y;
@@ -135,13 +146,15 @@ int act_skill(Object * obj, char *name)
 	char buf[64];
 	sprintf(buf, "skill %s is issued", name);
 	set_notice(obj, buf);
+	return 1;
 }
 
-int act_item(Object * obj, char *name)
+int act_item(Object * obj, char name[SHORT_STRLEN])
 {
 	char buf[64];
 	sprintf(buf, "item %s is used", name);
 	set_notice(obj, buf);
+	return 1;
 }
 
 void act(Object * obj, char *mode, int num)
@@ -149,15 +162,15 @@ void act(Object * obj, char *mode, int num)
 	char (*slots)[SHORT_STRLEN];
 	if (!strcmp(mode, "skill")) {
 		slots = obj->skill_slots;
-		act_skill(obj, &(slots[num]));
+		act_skill(obj, slots[num]);
 	}
 	if (!strcmp(mode, "item")) {
 		slots = obj->item_slots;
-		act_item(obj, &(slots[num]));
+		act_item(obj, slots[num]);
 	}
 	if (!strcmp(mode, "debug")) {
 		slots = obj->debug_slots;
-		act_debug(obj, &(slots[num]));
+		act_debug(obj, slots[num]);
 	}
 	strcpy(obj->last_action, slots[num]);
 }

@@ -1,3 +1,4 @@
+fix all warnings
 make poison effect initial, condition, tick, and terminate function
 apply them
 

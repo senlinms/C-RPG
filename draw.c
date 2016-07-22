@@ -21,7 +21,8 @@ void set_color(char bg, char fg)
 
 void print_notice(Object * obj, int x, int y)
 {
-	set_str(screen_buffer, obj->last_notice, x, y, 0, 3 + 8);
+	CHAR_INFO *buf = (CHAR_INFO *) screen_buffer;
+	set_str(buf, obj->last_notice, x, y, 0, 3 + 8);
 }
 
 void
@@ -64,18 +65,18 @@ void draw(World * w)
 	draw_map(w);
 	draw_system(w);
 	draw_fps();
-	write_scr(screen_buffer, BUFFER_CX, BUFFER_CY);
+	write_scr((CHAR_INFO *) screen_buffer, BUFFER_CX, BUFFER_CY);
 }
 
 void draw_system(World * w)
 {
 	char hp_str[32];
 	sprintf(hp_str, "HP:%7d", w->hero->hp);
-	set_str(screen_buffer, hp_str, 62, 0, 0, 4 + 8);
+	set_str((CHAR_INFO *) screen_buffer, hp_str, 62, 0, 0, 4 + 8);
 	print_gauge(62, 1, w->hero->max_hp, w->hero->hp, 4 + 8, 4);
 	char mp_str[32];
 	sprintf(mp_str, "MP:%7d", w->hero->mp);
-	set_str(screen_buffer, mp_str, 62, 2, 0, 1 + 8);
+	set_str((CHAR_INFO *) screen_buffer, mp_str, 62, 2, 0, 1 + 8);
 	print_gauge(62, 3, w->hero->max_mp, w->hero->mp, 1 + 8, 1);
 	print_mode(62, 4, w->hero);
 	print_notice(w->hero, 0, 21);
@@ -103,9 +104,9 @@ void draw_fps()
 	}
 
 	sprintf(buf, "fps:[%3d] goal_fps:[%3d]", last_frame_count, goal_fps);
-	set_str(screen_buffer, buf, 0, 23, 0, 15);
+	set_str((CHAR_INFO *) screen_buffer, buf, 0, 23, 0, 15);
 	int cur_x = strlen(buf);
-	set_str(screen_buffer, flag_str, 0 + cur_x, 23, 0, 4 + 8);
+	set_str((CHAR_INFO *) screen_buffer, flag_str, 0 + cur_x, 23, 0, 4 + 8);
 }
 
 void draw_map(World * w)
@@ -137,34 +138,35 @@ void draw_map(World * w)
 		for (cx = 0; cx < 30; cx++) {
 			Cell *c = cell_buffer[cy][cx];
 			if (c == 0) {
-				set_cell(screen_buffer, ' ', cx * 2, cy, 0, 0);
-				set_cell(screen_buffer, ' ', cx * 2 + 1, cy, 0,
-					 0);
+				set_cell((CHAR_INFO *) screen_buffer, ' ',
+					 cx * 2, cy, 0, 0);
+				set_cell((CHAR_INFO *) screen_buffer, ' ',
+					 cx * 2 + 1, cy, 0, 0);
 			} else {
 				//trim to fit 2 char
 				c->str[2] = 0;
 				int len = strlen(c->str);
 				if (len == 0) {
-					set_cell(screen_buffer, ' ', cx * 2, cy,
-						 0, 0);
-					set_cell(screen_buffer, ' ', cx * 2 + 1,
-						 cy, 0, 0);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 ' ', cx * 2, cy, 0, 0);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 ' ', cx * 2 + 1, cy, 0, 0);
 				}
 				if (len == 1) {
 
-					set_cell(screen_buffer, c->str[0],
-						 cx * 2, cy, c->bg_color,
-						 c->fg_color);
-					set_cell(screen_buffer, ' ', cx * 2 + 1,
-						 cy, 0, 0);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 c->str[0], cx * 2, cy,
+						 c->bg_color, c->fg_color);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 ' ', cx * 2 + 1, cy, 0, 0);
 				}
 				if (len == 2) {
-					set_cell(screen_buffer, c->str[0],
-						 cx * 2, cy, c->bg_color,
-						 c->fg_color);
-					set_cell(screen_buffer, c->str[1],
-						 cx * 2 + 1, cy, c->bg_color,
-						 c->fg_color);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 c->str[0], cx * 2, cy,
+						 c->bg_color, c->fg_color);
+					set_cell((CHAR_INFO *) screen_buffer,
+						 c->str[1], cx * 2 + 1, cy,
+						 c->bg_color, c->fg_color);
 				}
 			}
 		}
@@ -179,7 +181,7 @@ draw_examine(int display_x, int display_y, World * w, int x, int y,
 	Object *obj = obj_at(w, x, y, exclude);
 	if (obj == 0)
 		return 0;
-	set_str(screen_buffer, obj->type, display_x, display_y, 0,
+	set_str((CHAR_INFO *) screen_buffer, obj->type, display_x, display_y, 0,
 		obj->shape.fg_color);
 	return 1;
 }
@@ -191,7 +193,8 @@ print_gauge(int x, int y, int max, int current, unsigned char bright_color,
 	int dark, bright;
 	if (max == 0) {
 		//10 character
-		set_str(screen_buffer, "None      ", x, y, 0, dark_color);
+		set_str((CHAR_INFO *) screen_buffer, "None      ", x, y, 0,
+			dark_color);
 		return;
 	}
 	double g = (double)current / (double)max;
@@ -207,9 +210,11 @@ print_gauge(int x, int y, int max, int current, unsigned char bright_color,
 
 	int bi, di;
 	for (bi = 0; bi < bright; bi++)
-		set_str(screen_buffer, " ", x + bi, y, bright_color, 0);
+		set_str((CHAR_INFO *) screen_buffer, " ", x + bi, y,
+			bright_color, 0);
 	for (di = 0; di < dark; di++)
-		set_str(screen_buffer, " ", x + bi + di, y, dark_color, 0);
+		set_str((CHAR_INFO *) screen_buffer, " ", x + bi + di, y,
+			dark_color, 0);
 
 }
 
@@ -221,7 +226,7 @@ void print_mode_name(int x, int y, Object * obj, char *mode)
 	int pad = 16 - len;
 	if (pad < 0)
 		buf[15] = 0;
-	set_str(screen_buffer, buf, x, y, 0, 15);
+	set_str((CHAR_INFO *) screen_buffer, buf, x, y, 0, 15);
 }
 
 void print_mode(int x, int y, Object * obj)
@@ -251,9 +256,9 @@ print_mode_slots(int x, int y, Object * obj, int max_str_len,
 		sprintf(buf, "[%d] %s", i, slots[i]);
 		if (strlen(buf) > max_str_len)
 			buf[max_str_len] = 0;
-		int pad = max_str_len - strlen(buf);
-		int k;
-		set_str(screen_buffer, buf, x, y + ii, 0, 15 - 8);
+		//int pad = max_str_len - strlen(buf);
+		//int k;
+		set_str((CHAR_INFO *) screen_buffer, buf, x, y + ii, 0, 15 - 8);
 		ii++;
 	}
 }

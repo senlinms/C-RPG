@@ -1,6 +1,6 @@
 @echo off
 REM    gcc -Wall -Werror main.c -s -m32 -o game.exe
-cproto *.c > proto.h
+cproto -DPROTO_H -e -p -v -o proto.h *.c 
 gcc *.c -pg -static -m32 -std=c11 -Wall -o game[profile].exe -DDEBUG
 
 if not %errorlevel%==0 (

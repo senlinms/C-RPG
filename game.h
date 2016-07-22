@@ -17,23 +17,24 @@ struct World;
 
 typedef void (*fn_scene)(struct World*);
 
-typedef int (*fn_obj)(struct Object * obj);
-typedef int (*fn_obj_obj)(struct Object * obj_me, struct Object * obj_other);
+//typedef int (*fn_obj)(struct Object * obj);
+//typedef int (*fn_obj_obj)(struct Object * obj_me, struct Object * obj_other);
+typedef int (*fnptr)(struct Object * obj_me, struct Object * obj_other);
 
 typedef struct state_slot
 {
 	char *name;
-	fn_obj fn_initial;
-	fn_obj fn_tick_condition;
-	fn_obj fn_tick;
-	fn_obj fn_terminate;
+	fnptr fn_initial;
+	fnptr fn_tick_condition;
+	fnptr fn_tick;
+	fnptr fn_terminate;
 	
 } state_slot;
 typedef struct str_str_fn
 {
 	char* name;
 	char* long_name;
-	fn_obj fn;
+	fnptr fn;
 } str_str_fn;
 
 typedef struct Cell
@@ -57,9 +58,9 @@ typedef struct Object
     int max_hp,max_mp;
     int power;
     struct Cell shape;
-    fn_obj death_fn;
-    fn_obj tick_fn;
-    fn_obj_obj overlap_fn;
+    fnptr death_fn;
+    fnptr tick_fn;
+    fnptr overlap_fn;
 
     int x,y;
     int timer;
