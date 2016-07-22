@@ -9,8 +9,9 @@ void tick_overlap(World * w)
 	for(i=0;i<500;i++)
 	{
 		Object * o = &(w->objs[i]);
+		//objs array defragmented, assume so, it's safe to break
 		if(o->exist == 0)
-			continue;
+			break;
 		int x = w->objs[i].x;
 		int y = w->objs[i].y;
 		if(arr[y][x] == 0)
