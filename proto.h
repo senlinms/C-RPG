@@ -97,6 +97,7 @@ int fn_death_drop(Object *me);
 int fn_thru_bullet_timer(Object *me);
 /* tick.c */
 void tick_overlap(World *w);
+void __OLD_tick_overlap(World *w);
 void tick_self(World *w);
 void tick(World *w);
 /* world.c */

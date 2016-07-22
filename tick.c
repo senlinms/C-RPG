@@ -2,6 +2,7 @@
 
 void tick_overlap(World * w)
 {
+	int i;
 	//static. it's to avoid allocation too many times
 	static Object * arr[100][100];
 	memset(arr,0,sizeof(Object*)*100*100);
@@ -16,14 +17,24 @@ void tick_overlap(World * w)
 			arr[y][x] = o;
 		else
 		{
+			//if overlap_fn is not exist, it is not necessary to check both objects. but just for clearity, check 2 objs first
 			Object * o2 = arr[y][x];
-			//TODO: check exist because overlap_fn may change exist value
+			if(o2->exist == 0)
+				continue;
+			//double check may not need, but just for clearity.
+			if(o->exist == 0)
+				continue;
 			if(o2->overlap_fn != 0)
 				o2->overlap_fn(o2,o);
-			if(o->overlap_fn)
-				
-			
-			
+			//overlap_fn may change everything, so check again.
+			//overlap_fn may not check existance of 2 object. so check in this function.
+			if(o->exist == 0)
+				continue;
+		
+			if(o2->exist == 0)
+				continue;			
+			if(o->overlap_fn != 0)
+				o->overlap_fn(o,o2);
 		}
 		
 	}
