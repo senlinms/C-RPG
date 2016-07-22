@@ -1,3 +1,4 @@
+
 #1 right click => exit
 if there's 'q' letter in clipboard, and you click with right mouse button, 
 it will paste all letters in clipboard. 
@@ -6,3 +7,7 @@ key_process function will catch all the letter pasted, subsquently exit the prog
 how to regenerate this bug: 
 1. copy 'debug quit'
 2. right click on the game screen
+
+#2 pressing unassigned button will terminate program abnormally
+how to regenerate this bug:
+1. press 'z'
