@@ -1,6 +1,14 @@
-fix all warnings
-make poison effect initial, condition, tick, and terminate function
-apply them
+save all and rebuild from scratch with some philosophies: 
+	1) make each program do one thing well
+	2) make each program communicate with other
+	3) make logic to data
+	4) optimize later, prototype first
+	5) write code to write code
+
+
+reorganize source files
+add message window
+message window trigger
 
 strcmp -> strncmp
 state effect: poison(reduce hp), damaged(red blink), 
@@ -25,3 +33,5 @@ heal - spread heals 5x5 size
 
 imitate starcraft use map setting game
 zergling blood, control hill defense, dodge bomb, etc
+
+make terminal emulator

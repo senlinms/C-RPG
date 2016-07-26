@@ -32,10 +32,33 @@ realtime terminal RPG game written in C
 
 [i] Open item menu
 
+[q] Quit game
+
 [0~9] Select corresponding item from current menu
+
+[`] test new feature(poison effect)
 
 # How to build from source
 run build.bat 
+
 compile routine requires gcc and cproto.
+
 without source code modification, you can remove cproto line from build.bat file.
+
 in this case, it requires gcc only. no curses library needed.
+
+# Todo
+Read some programming philosophy book and then rebuild from scratch with some philosophies.
+
+(Art of unix programming)
+
+1) make each program do one thing well
+
+2) make each program communicate with other
+
+3) make logic to data
+
+4) optimize later, prototype first
+
+5) write code to write code
+
